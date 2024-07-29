@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .logo {
+        font-weight: 700;
+        color: var(--color-secondary);
+    }
+
+    .header-right {
+        --gap: 20px;
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+
+        .header-nav-list {
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+
+            a {
+                opacity: 0.8;
+                font-weight: 600;
+                text-transform: uppercase;
+                padding: 8px;
+                display: inline-block;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .btn-to-sign {
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+}

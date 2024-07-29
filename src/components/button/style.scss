@@ -1,0 +1,14 @@
+.wrap-button {
+    .button-common {
+        font-family: inherit;
+        font-weight: 600;
+        font-size: inherit;
+        padding: 20px;
+        color: var(--color-secondary);
+    }
+
+    :where(.css-dev-only-do-not-override-1uq9j6g).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+        color: var(--color-secondary);
+        border-color: var(--color-secondary);
+    }
+}

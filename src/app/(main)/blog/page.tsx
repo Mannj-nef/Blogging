@@ -1,0 +1,8 @@
+'use client'
+import React from 'react'
+
+const BlogPage = () => {
+  return <div>lorem</div>
+}
+
+export default BlogPage

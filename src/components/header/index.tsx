@@ -7,7 +7,7 @@ import { NAVIGATORS } from '~/shared/data'
 
 const Header = () => {
   return (
-    <div className="header container">
+    <header className="header container">
       <Link href="/">
         <h1 className="logo">Blogging</h1>
       </Link>
@@ -23,7 +23,7 @@ const Header = () => {
 
         <Button className="btn-to-sign">Sign in</Button>
       </div>
-    </div>
+    </header>
   )
 }
 

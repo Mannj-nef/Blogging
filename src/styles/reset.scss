@@ -5,6 +5,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "inter", sans-serif;
 }
 /*
     2. Remove default margin
@@ -72,4 +73,5 @@ a {
 ul,
 li {
   list-style: none;
+  padding: 0;
 }

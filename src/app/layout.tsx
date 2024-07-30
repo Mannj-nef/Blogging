@@ -1,5 +1,5 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
 import ReactQueryClientProvider from '~/components/reactQueryClientProvider'
 
 import '~/styles/reset.scss'
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <ReactQueryClientProvider>
         <body className={inter.className}>
           <RootStyleRegistry>{children}</RootStyleRegistry>

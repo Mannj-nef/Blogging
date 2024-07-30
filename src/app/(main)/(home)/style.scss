@@ -31,6 +31,7 @@
 
             .hero-button {
                 margin-top: 30px;
+                width: fit-content;
                 color: var(--color-primary);
                 background-color: var(--color-text-primary);
 
@@ -87,6 +88,7 @@
                         background-color: var(--color-secondary);
                         border: none;
                         outline: none;
+                        width: fit-content;
 
                         &:hover {
                             color: var(--color-primary);
@@ -148,6 +150,14 @@
                     a {
                         color: var(--color-link);
                         cursor: pointer;
+                    }
+
+                    &:hover {
+                        transform: translate(-10px, -10px);
+                        transition: all 0.5s linear;
+                        box-shadow:
+                            rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+                            rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
                     }
                 }
             }

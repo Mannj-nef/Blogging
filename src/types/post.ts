@@ -1,3 +1,5 @@
+import { User } from './user'
+
 export enum STATUS_POST {
   PUBLIC = 'public',
   PRIVATE = 'private'
@@ -15,9 +17,7 @@ export enum Category {
 
 export type Post = {
   id: string
-  user: {
-    userName: string
-  }
+  user: User
 
   title: string
   slug: string

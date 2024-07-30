@@ -2,8 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import './style.scss'
 
-import Button from '~/components/button'
 import { NAVIGATORS } from '~/shared/data'
+import User from './user'
 
 const Header = () => {
   return (
@@ -21,7 +21,7 @@ const Header = () => {
           ))}
         </ul>
 
-        <Button className="btn-to-sign">Sign in</Button>
+        <User />
       </div>
     </header>
   )

@@ -14,6 +14,8 @@ export type AuthState = {
 }
 
 export type AuthAction = {
+  setAuth: (auth: User) => void
+  setResetModalAuth: () => void
   setIsOpenModalAuth: (isOpenModalAuth: boolean) => void
   setTitleModal: (titleModal: TittleModal) => void
 }
@@ -25,6 +27,9 @@ const useAuthStore = create<AuthStore>((set) => ({
   titleModal: 'LOGIN',
   auth: undefined,
 
+  setAuth: (auth: User) => set(() => ({ auth })),
+  setResetModalAuth: () =>
+    set(() => ({ isOpenModalAuth: false, titleModal: 'LOGIN' })),
   setIsOpenModalAuth: (isOpenModalAuth: boolean) =>
     set(() => ({ isOpenModalAuth })),
   setTitleModal: (titleModal: TittleModal) => set(() => ({ titleModal }))

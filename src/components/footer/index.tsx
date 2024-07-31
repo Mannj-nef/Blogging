@@ -60,6 +60,7 @@ const Footer = () => {
                   width={200}
                   height={50}
                   alt="App Store"
+                  loading="lazy"
                 ></Image>
               </div>
               <div>
@@ -68,6 +69,7 @@ const Footer = () => {
                   width={200}
                   height={50}
                   alt="App Store"
+                  loading="lazy"
                 ></Image>
               </div>
             </div>
@@ -78,6 +80,7 @@ const Footer = () => {
                 alt="mannjneff"
                 width={200}
                 height={200}
+                loading="lazy"
               />
             </div>
           </div>

@@ -3,6 +3,11 @@ import { Form, FormProps, Input } from 'antd'
 import './style.scss'
 import Button from '~/components/button'
 import useAuthStore from '~/store/authStore'
+import { useMutation } from '@tanstack/react-query'
+import { MESSAGE, QUERY_KEY } from '~/shared/constants'
+import { signIn } from '~/services/auth'
+import { RequestSignIn } from '~/types/request/auth'
+import useToast from '~/hooks/useToast'
 
 type FieldType = {
   email: string
@@ -10,10 +15,30 @@ type FieldType = {
 }
 
 const SignIn = () => {
-  const { setTitleModal } = useAuthStore()
+  const { contextHolder, openNotification } = useToast()
+  const { setResetModalAuth, setTitleModal } = useAuthStore()
+
+  const { mutate } = useMutation({
+    mutationKey: [QUERY_KEY.SIGN_IN],
+    mutationFn: (payload: RequestSignIn) => signIn(payload)
+  })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values)
+    mutate(values, {
+      onSuccess: () => {
+        setResetModalAuth()
+      },
+      
+      onError: (err: any) => {
+        const errorMessage =
+          err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+
+        openNotification({
+          message: errorMessage,
+          type: 'error'
+        })
+      }
+    })
   }
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
@@ -23,6 +48,7 @@ const SignIn = () => {
   }
   return (
     <div className="sign-in">
+      {contextHolder}
       <div className="sign-in-top">
         <h2>Welcome back</h2>
         <p>Welcome back? Please enter your detail</p>
@@ -38,7 +64,10 @@ const SignIn = () => {
           label="Email Address"
           name="email"
           className="field-wrapper"
-          rules={[{ type: 'email', message: 'Please input valid Email!' }]}
+          rules={[
+            { required: true },
+            { type: 'email', message: 'Please input valid Email!' }
+          ]}
         >
           <Input placeholder="Enter your email" />
         </Form.Item>
@@ -47,7 +76,10 @@ const SignIn = () => {
           label="Password"
           name="password"
           className="field-wrapper"
-          rules={[{ min: 6, message: 'Please input your password!' }]}
+          rules={[
+            { required: true },
+            { min: 6, message: 'Please input your password!' }
+          ]}
         >
           <Input.Password placeholder="Enter your password" />
         </Form.Item>

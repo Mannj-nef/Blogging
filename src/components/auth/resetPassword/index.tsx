@@ -38,7 +38,7 @@ const ResetPassword = () => {
   }
   return (
     <div className="reset-password">
-      <h2 className="sign-up-top">Reset password</h2>
+      <h2 className="reset-password-top">Reset password</h2>
 
       <Form
         layout="vertical"

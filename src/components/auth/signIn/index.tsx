@@ -53,7 +53,12 @@ const SignIn = () => {
         </Form.Item>
 
         <Form.Item>
-          <p className="forgot-password">Forgot password</p>
+          <p
+            onClick={() => setTitleModal('FORGOT_PASSWORD')}
+            className="forgot-password"
+          >
+            Forgot password
+          </p>
         </Form.Item>
 
         <Form.Item>

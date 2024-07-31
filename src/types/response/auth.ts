@@ -1,3 +1,5 @@
+import { User } from '~/types/user'
+
 export type ResponseAuthBase = {
   message: string
   token: {
@@ -16,4 +18,9 @@ export type ResponseRefreshToken = ResponseAuthBase
 
 export type ResponseForgotPassword = Omit<ResponseAuthBase, 'token'>
 
-export type RequestLogOut = Omit<ResponseAuthBase, 'token'>
+export type ResponseLogOut = Omit<ResponseAuthBase, 'token'>
+
+export type ResponseUser = {
+  message: string
+  user: User
+}

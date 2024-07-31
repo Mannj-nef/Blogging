@@ -1,7 +1,8 @@
-
 const { env } = process
 
 export const ENV = {
-    BASE_API_URL: env.NEXT_PUBLIC_BASE_URL
-}
-
+  BASE_API_URL_FULL: env.NEXT_PUBLIC_BASE_URL,
+  BASE_API_URL: env.NEXT_PUBLIC_API_URL,
+  BASE_API_PORT: env.NEXT_PUBLIC_API_PORT,
+  BASE_API_PREFIX: env.NEXT_PUBLIC_API_PREFIX
+} as const

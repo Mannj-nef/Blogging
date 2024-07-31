@@ -1,14 +1,15 @@
 import axios from 'axios'
 import { ENV } from '~/shared/constants'
+import { LOCAL_STORAGE } from '~/shared/constants/localStorage'
 
 const token: {
   access_token: string
   refresh_token: string
-} = localStorage.getItem('token')
+} = localStorage.getItem(LOCAL_STORAGE.TOKEN)
   ? JSON.parse(localStorage.getItem('token') as string)
   : null
 
-const http = axios.create({
+const httpPrivate = axios.create({
   baseURL: ENV.BASE_API_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -20,4 +21,4 @@ const http = axios.create({
 // http.interceptors.request.use(handleRequest)
 // http.interceptors.response.use(handleResponse, handleErrorResponse)
 
-export default http
+export default httpPrivate

@@ -5,7 +5,7 @@ import ReactQueryClientProvider from '~/components/reactQueryClientProvider'
 import '~/styles/reset.scss'
 import '~/styles/variable.scss'
 import '~/styles/globals.scss'
-import { RootStyleRegistry } from '~/lib/RootStyleRegistry '
+import { RootStyleRegistry } from '~/lib/rootStyleRegistry'
 
 const inter = Inter({
   subsets: ['latin'],

@@ -2,9 +2,6 @@ import { Card } from 'antd'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Post } from '~/types/post'
-
-// const { Meta } = Card
-
 interface ICardPost {
   post: Post
 }

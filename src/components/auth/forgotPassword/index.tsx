@@ -37,7 +37,7 @@ const ForgotPassword = () => {
           className="field-wrapper"
           rules={[{ type: 'email', message: 'Please input valid Email!' }]}
         >
-          <Input />
+          <Input placeholder="Enter your email" />
         </Form.Item>
 
         <Form.Item>

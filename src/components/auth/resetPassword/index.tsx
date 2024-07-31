@@ -58,7 +58,7 @@ const ResetPassword = () => {
           className="field-wrapper"
           rules={[{ min: 6, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Enter your password" />
         </Form.Item>
 
         <Form.Item
@@ -78,7 +78,7 @@ const ResetPassword = () => {
             })
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Enter your password" />
         </Form.Item>
 
         <div

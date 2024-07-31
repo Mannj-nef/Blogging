@@ -40,7 +40,7 @@ const SignIn = () => {
           className="field-wrapper"
           rules={[{ type: 'email', message: 'Please input valid Email!' }]}
         >
-          <Input />
+          <Input placeholder="Enter your email" />
         </Form.Item>
 
         <Form.Item
@@ -49,7 +49,7 @@ const SignIn = () => {
           className="field-wrapper"
           rules={[{ min: 6, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Enter your password" />
         </Form.Item>
 
         <Form.Item>

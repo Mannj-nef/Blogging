@@ -1,24 +1,17 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { ENV } from '~/shared/constants'
-import { LOCAL_STORAGE } from '~/shared/constants/localStorage'
-
-const token: {
-  access_token: string
-  refresh_token: string
-} = localStorage.getItem(LOCAL_STORAGE.TOKEN)
-  ? JSON.parse(localStorage.getItem('token') as string)
-  : null
+import { handelRequestPrivate } from './handleRequest'
+import { handleErrorResponse, handleResponseAuth } from './response'
 
 const httpPrivate = axios.create({
-  baseURL: ENV.BASE_API_URL,
+  baseURL: ENV.BASE_API_URL_FULL,
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token.access_token}`
+    'Content-Type': 'application/json'
   },
   timeout: 30000
 })
 
-// http.interceptors.request.use(handleRequest)
-// http.interceptors.response.use(handleResponse, handleErrorResponse)
+httpPrivate.interceptors.request.use(handelRequestPrivate)
+httpPrivate.interceptors.response.use(handleResponseAuth, handleErrorResponse)
 
 export default httpPrivate

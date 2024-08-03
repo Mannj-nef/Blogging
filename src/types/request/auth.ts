@@ -4,7 +4,7 @@ export type RequestSignIn = {
 }
 
 export type RequestSignUp = {
-  username: string
+  userName: string
   password: string
   confirmPassword: string
   email: string

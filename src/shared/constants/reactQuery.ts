@@ -4,5 +4,7 @@ export const QUERY_KEY = {
   FORGOT_PASSWORD: 'forgot-password',
   RESET_PASSWORD: 'reset-password',
   REFRESH_TOKEN: 'refresh-token',
-  LOGOUT: 'logout'
+  LOGOUT: 'logout',
+
+  GET_ME: 'get-me'
 } as const

@@ -1,4 +1,5 @@
-import { create, createStore } from 'zustand'
+import { create } from 'zustand'
+import { getMe } from '~/services/user'
 import { User } from '~/types/user'
 
 export type TittleModal =
@@ -14,6 +15,8 @@ export type AuthState = {
 }
 
 export type AuthAction = {
+  authenticationSuccess: () => void
+  getAuth: () => void
   setAuth: (auth: User) => void
   setResetModalAuth: () => void
   setIsOpenModalAuth: (isOpenModalAuth: boolean) => void
@@ -28,11 +31,27 @@ const useAuthStore = create<AuthStore>((set) => ({
   auth: undefined,
 
   setAuth: (auth: User) => set(() => ({ auth })),
-  setResetModalAuth: () =>
-    set(() => ({ isOpenModalAuth: false, titleModal: 'LOGIN' })),
-  setIsOpenModalAuth: (isOpenModalAuth: boolean) =>
-    set(() => ({ isOpenModalAuth })),
-  setTitleModal: (titleModal: TittleModal) => set(() => ({ titleModal }))
+  setTitleModal: (titleModal: TittleModal) => set(() => ({ titleModal })),
+
+  setResetModalAuth: () => {
+    set(() => ({ isOpenModalAuth: false, titleModal: 'LOGIN' }))
+  },
+
+  setIsOpenModalAuth: (isOpenModalAuth: boolean) => {
+    set(() => ({ isOpenModalAuth }))
+  },
+
+  authenticationSuccess: async () => {
+    const { user } = await getMe()
+
+    set(() => ({ auth: user }))
+    set(() => ({ isOpenModalAuth: false, titleModal: 'LOGIN' }))
+  },
+
+  getAuth: async () => {
+    const { user } = await getMe()
+    set(() => ({ auth: user }))
+  }
 }))
 
 export default useAuthStore

@@ -3,7 +3,6 @@ import { API_ENDPOINT } from '~/shared/constants'
 import {
   RequestForgotPassword,
   RequestLogOut,
-  RequestRefreshToken,
   RequestResetPassword,
   RequestSignIn,
   RequestSignUp
@@ -18,7 +17,7 @@ import {
 } from '~/types/response/auth'
 
 export const signIn = async (payload: RequestSignIn) => {
-  const { data } = await httpPublic.post<ResponseSignIn>(
+  const data = await httpPublic.post<ResponseSignIn>(
     API_ENDPOINT.SIGN_IN,
     payload
   )
@@ -44,14 +43,6 @@ export const forgotPassword = async (payload: RequestForgotPassword) => {
 export const resetPassword = async (payload: RequestResetPassword) => {
   const { data } = await httpPublic.post<ResponseResetPassword>(
     API_ENDPOINT.RESET_PASSWORD,
-    payload
-  )
-  return data
-}
-
-export const refreshToken = async (payload: RequestRefreshToken) => {
-  const { data } = await httpPublic.post<ResponseRefreshToken>(
-    API_ENDPOINT.REFRESH_TOKEN,
     payload
   )
   return data

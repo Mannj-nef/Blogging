@@ -4,7 +4,7 @@ import './style.scss'
 import Button from '~/components/button'
 import useAuthStore from '~/store/authStore'
 import { useMutation } from '@tanstack/react-query'
-import { MESSAGE, QUERY_KEY } from '~/shared/constants'
+import { MESSAGE } from '~/shared/constants'
 import { signIn } from '~/services/auth'
 import { RequestSignIn } from '~/types/request/auth'
 import useToast from '~/hooks/useToast'
@@ -16,19 +16,19 @@ type FieldType = {
 
 const SignIn = () => {
   const { contextHolder, openNotification } = useToast()
-  const { setResetModalAuth, setTitleModal } = useAuthStore()
+  const { setResetModalAuth, setTitleModal, getAuth, authenticationSuccess } =
+    useAuthStore()
 
-  const { mutate } = useMutation({
-    mutationKey: [QUERY_KEY.SIGN_IN],
+  const { mutate, isPending } = useMutation({
     mutationFn: (payload: RequestSignIn) => signIn(payload)
   })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     mutate(values, {
       onSuccess: () => {
-        setResetModalAuth()
+        authenticationSuccess()
       },
-      
+
       onError: (err: any) => {
         const errorMessage =
           err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
@@ -46,6 +46,7 @@ const SignIn = () => {
   ) => {
     console.log('Failed:', errorInfo)
   }
+
   return (
     <div className="sign-in">
       {contextHolder}
@@ -65,7 +66,7 @@ const SignIn = () => {
           name="email"
           className="field-wrapper"
           rules={[
-            { required: true },
+            { required: true, message: 'Email is required' },
             { type: 'email', message: 'Please input valid Email!' }
           ]}
         >
@@ -77,7 +78,7 @@ const SignIn = () => {
           name="password"
           className="field-wrapper"
           rules={[
-            { required: true },
+            { required: true, message: 'Password is required' },
             { min: 6, message: 'Please input your password!' }
           ]}
         >
@@ -94,7 +95,7 @@ const SignIn = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button htmlType="submit" className="sign-button">
+          <Button htmlType="submit" className="sign-button" loading={isPending}>
             Submit
           </Button>
         </Form.Item>

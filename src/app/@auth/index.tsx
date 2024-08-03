@@ -1,6 +1,6 @@
 'use client'
-
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import React, { useCallback, useEffect } from 'react'
 import {
   ForgotPassword,
   ResetPassword,
@@ -8,10 +8,24 @@ import {
   SignUp
 } from '~/components/auth'
 import Modal from '~/components/modal'
+import { getMe } from '~/services/user'
+import { QUERY_KEY } from '~/shared/constants'
 import useAuthStore from '~/store/authStore'
+import { getToken } from '~/utils/handleToken'
 
 const Auth = () => {
-  const { isOpenModalAuth, titleModal, setIsOpenModalAuth } = useAuthStore()
+  const {
+    isOpenModalAuth,
+    titleModal,
+    setIsOpenModalAuth,
+    setAuth,
+    setResetModalAuth
+  } = useAuthStore()
+
+  const { data: responseUser, error } = useQuery({
+    queryKey: [QUERY_KEY.GET_ME],
+    queryFn: getMe
+  })
 
   const handleOk = () => {
     setIsOpenModalAuth(false)
@@ -41,8 +55,14 @@ const Auth = () => {
   }, [titleModal])
 
   useEffect(() => {
-    setIsOpenModalAuth(true)
-  }, [setIsOpenModalAuth])
+    if (responseUser) {
+      setAuth(responseUser.user)
+    }
+
+    if (error) {
+      setIsOpenModalAuth(true)
+    }
+  }, [error, responseUser, setAuth, setIsOpenModalAuth])
 
   return (
     <>

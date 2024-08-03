@@ -19,7 +19,9 @@ const TrendingCard = ({ post }: IProps) => {
       />
 
       <div className="trending-content">
-        <Button>{post.category}</Button>
+        <div style={{ width: 'fit-content' }}>
+          <Button>{post.category}</Button>
+        </div>
         <h3 className="text-line-3">{post.title}</h3>
       </div>
     </div>

@@ -7,6 +7,7 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   className?: string
   htmlType?: ButtonType
+  loading?: boolean
 }
 
 const Button = ({
@@ -17,9 +18,11 @@ const Button = ({
   return (
     <div className="wrap-button">
       <AntButton
+        style={{ width: '100%' }}
         color="#b39b9b"
         className={`button-common ${className}`}
         htmlType={htmlType}
+        loading={props.loading}
         {...props}
       >
         {props.children}

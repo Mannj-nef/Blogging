@@ -18,7 +18,9 @@ const Hero = () => {
           accusantium at!
         </p>
 
-        <Button className="hero-button">Button</Button>
+        <div style={{ width: 'fit-content', margin: 'auto' }}>
+          <Button className="hero-button">Button</Button>
+        </div>
       </div>
     </div>
   )

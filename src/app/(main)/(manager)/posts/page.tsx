@@ -1,91 +1,99 @@
 'use client'
-
-import { Space, Table, TableProps, Tag } from 'antd'
+import { Table, TableProps, Tag } from 'antd'
+import Image from 'next/image'
+import { useMemo } from 'react'
 import Input from '~/components/from/Input'
 import { IconSearch } from '~/components/icons'
+import ActionTable from '~/modules/post/action'
+import { IMAGES } from '~/shared/images'
+import { CATEGORY, STATUS_POST } from '~/types/post'
 
 interface DataType {
-  key: string
+  id: string
   name: string
-  age: number
-  address: string
-  tags: string[]
+  category: CATEGORY
+  status: STATUS_POST
 }
 
 const data: DataType[] = [
   {
-    key: '1',
+    id: '1',
     name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer']
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser']
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher']
-  }
-]
-
-const columns: TableProps<DataType>['columns'] = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age'
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address'
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green'
-          if (tag === 'loser') {
-            color = 'volcano'
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          )
-        })}
-      </>
-    )
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    )
+    category: CATEGORY.FROND_END,
+    status: STATUS_POST.PUBLIC
   }
 ]
 
 const YourPosts = () => {
+  const columns: TableProps<DataType>['columns'] = useMemo(
+    () => [
+      {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id'
+      },
+      {
+        title: 'Post',
+        dataIndex: 'name',
+        key: 'name',
+        render: (_, record) => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: 12,
+                overflow: 'hidden'
+              }}
+            >
+              <Image
+                src={IMAGES.IMAGE_DEFAULT}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                alt=""
+                width={100}
+                height={100}
+              />
+            </div>
+
+            <h3>{record.name}</h3>
+          </div>
+        )
+      },
+      {
+        title: 'Category',
+        dataIndex: 'category',
+        key: 'category',
+        render: (_, { category }) => (
+          <>
+            <Tag color={'cyan'} key={category}>
+              {category.toUpperCase()}
+            </Tag>
+          </>
+        )
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        render: (_, { status }) => (
+          <>
+            {status === STATUS_POST.PUBLIC ? (
+              <Tag color={'green'}>{status.toUpperCase()}</Tag>
+            ) : (
+              <Tag color={'volcano'}>{status.toUpperCase()}</Tag>
+            )}
+          </>
+        )
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => <ActionTable postId={record.id} />
+      }
+    ],
+    []
+  )
+
   return (
     <div className="your-posts-wrapper">
       <div className="your-posts-top">

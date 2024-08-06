@@ -38,7 +38,6 @@ const UserDetail = () => {
   }
 
   if (!auth) return null
-  console.log(auth.dateOfBirth)
 
   return (
     <div className="profile-wrapper">

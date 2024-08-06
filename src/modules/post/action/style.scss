@@ -1,0 +1,12 @@
+.action-table-wrapper {
+    display: flex;
+    gap: 15px;
+
+    .action-item {
+        cursor: pointer;
+        padding: 5px;
+        border: 1px solid var(--color-primary);
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+}

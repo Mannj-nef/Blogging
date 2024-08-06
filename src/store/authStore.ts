@@ -8,29 +8,29 @@ export type TittleModal =
   | 'FORGOT_PASSWORD'
   | 'RESET_PASSWORD'
 
-export type AuthState = {
+type AuthState = {
   isOpenModalAuth: boolean
   titleModal: TittleModal
   auth?: User
 }
 
-export type AuthAction = {
+type AuthAction = {
   authenticationSuccess: () => void
   getAuth: () => void
-  setAuth: (auth: User) => void
+  setAuth: (auth?: User) => void
   setResetModalAuth: () => void
   setIsOpenModalAuth: (isOpenModalAuth: boolean) => void
   setTitleModal: (titleModal: TittleModal) => void
 }
 
-export type AuthStore = AuthState & AuthAction
+type AuthStore = AuthState & AuthAction
 
 const useAuthStore = create<AuthStore>((set) => ({
   isOpenModalAuth: false,
   titleModal: 'LOGIN',
   auth: undefined,
 
-  setAuth: (auth: User) => set(() => ({ auth })),
+  setAuth: (auth?: User) => set(() => ({ auth })),
   setTitleModal: (titleModal: TittleModal) => set(() => ({ titleModal })),
 
   setResetModalAuth: () => {

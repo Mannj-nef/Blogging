@@ -1,13 +1,11 @@
-import { Category, Post, STATUS_POST } from '~/types/post'
+import { CATEGORY as CATEGORY_ENUM, Post, STATUS_POST } from '~/types/post'
 
-export const CATEGORY: Category[] = [
-  Category.FROND_END,
-  Category.BACK_END,
-  Category.FULL_STACK,
-  Category.DEV_OPS,
-  Category.MOBILE,
-  Category.GAME,
-  Category.DESIGN
+export const CATEGORY: CATEGORY_ENUM[] = [
+  CATEGORY_ENUM.FROND_END,
+  CATEGORY_ENUM.BACK_END,
+  CATEGORY_ENUM.FULL_STACK,
+  CATEGORY_ENUM.MOBILE,
+  CATEGORY_ENUM.GAME
 ]
 
 export const POSTS: Post[] = [
@@ -23,7 +21,7 @@ export const POSTS: Post[] = [
     popularity: 10,
     createdAt: '29/07/2024',
     updateAt: '29/07/2024',
-    category: Category.FROND_END,
+    category: CATEGORY_ENUM.FROND_END,
     imageThumbnail:
       'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bmF0dXJlfGVufDB8MXwwfHx8MA%3D%3D'
   },
@@ -40,7 +38,7 @@ export const POSTS: Post[] = [
     popularity: 10,
     createdAt: '29/07/2024',
     updateAt: '29/07/2024',
-    category: Category.FROND_END,
+    category: CATEGORY_ENUM.FROND_END,
     imageThumbnail:
       'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG5hdHVyZXxlbnwwfDF8MHx8fDA%3D'
   },
@@ -56,7 +54,7 @@ export const POSTS: Post[] = [
     popularity: 10,
     createdAt: '29/07/2024',
     updateAt: '29/07/2024',
-    category: Category.BACK_END,
+    category: CATEGORY_ENUM.BACK_END,
     imageThumbnail:
       'https://plus.unsplash.com/premium_photo-1675827055620-24d540e0892a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG5hdHVyZXxlbnwwfDF8MHx8fDA%3D'
   },
@@ -72,7 +70,7 @@ export const POSTS: Post[] = [
     popularity: 10,
     createdAt: '29/07/2024',
     updateAt: '29/07/2024',
-    category: Category.BACK_END,
+    category: CATEGORY_ENUM.BACK_END,
     imageThumbnail:
       'https://plus.unsplash.com/premium_photo-1673264933051-3206029946b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG5hdHVyZXxlbnwwfDF8MHx8fDA%3D'
   }

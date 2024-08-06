@@ -16,8 +16,7 @@ type FieldType = {
 
 const SignIn = () => {
   const { contextHolder, openNotification } = useToast()
-  const { setResetModalAuth, setTitleModal, getAuth, authenticationSuccess } =
-    useAuthStore()
+  const { setTitleModal, authenticationSuccess } = useAuthStore()
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: RequestSignIn) => signIn(payload)

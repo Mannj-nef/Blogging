@@ -1,6 +1,5 @@
 'use client'
 import { Modal as ModalAntd } from 'antd'
-import { useEffect, useState } from 'react'
 import React from 'react'
 
 interface IProps {
@@ -8,15 +7,23 @@ interface IProps {
   isModalOpen: boolean
   handleOk: () => void
   handleCancel: () => void
+  closeIcon?: boolean
 }
 
-const Modal = ({ children, isModalOpen, handleOk, handleCancel }: IProps) => {
+const Modal = ({
+  children,
+  isModalOpen,
+  handleOk,
+  handleCancel,
+  closeIcon = true
+}: IProps) => {
   return (
     <ModalAntd
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={null}
+      closeIcon={closeIcon}
     >
       {children}
     </ModalAntd>

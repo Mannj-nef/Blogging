@@ -20,22 +20,19 @@ type FieldType = {
 
 const SignUp = () => {
   const { contextHolder, openNotification } = useToast()
-  const { setTitleModal, setResetModalAuth } = useAuthStore()
+  const { setTitleModal, authenticationSuccess } = useAuthStore()
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: RequestSignUp) => signUp(payload)
   })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values)
     mutate(values, {
       onSuccess: () => {
-        setResetModalAuth()
+        authenticationSuccess()
       },
 
       onError: (err: any) => {
-        console.log(123)
-
         const errorMessage =
           err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
 

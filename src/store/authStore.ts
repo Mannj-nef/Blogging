@@ -12,9 +12,11 @@ type AuthState = {
   isOpenModalAuth: boolean
   titleModal: TittleModal
   auth?: User
+  email?: string
 }
 
 type AuthAction = {
+  setEmail: (email: string) => void
   authenticationSuccess: () => void
   getAuth: () => void
   setAuth: (auth?: User) => void
@@ -26,10 +28,12 @@ type AuthAction = {
 type AuthStore = AuthState & AuthAction
 
 const useAuthStore = create<AuthStore>((set) => ({
+  email: '',
   isOpenModalAuth: false,
   titleModal: 'LOGIN',
   auth: undefined,
 
+  setEmail: (email: string) => set(() => ({ email })),
   setAuth: (auth?: User) => set(() => ({ auth })),
   setTitleModal: (titleModal: TittleModal) => set(() => ({ titleModal })),
 

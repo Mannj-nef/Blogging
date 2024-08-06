@@ -7,6 +7,10 @@ import useAuthStore from '~/store/authStore'
 
 import './style.scss'
 import { IconBack } from '~/components/icons'
+import { resetPassword } from '~/services/auth'
+import { useMutation } from '@tanstack/react-query'
+import useToast from '~/hooks/useToast'
+import { MESSAGE } from '~/shared/constants'
 
 type FieldType = {
   password: string
@@ -17,10 +21,39 @@ type FieldType = {
 type OTPProps = GetProps<typeof Input.OTP>
 
 const ResetPassword = () => {
-  const { setTitleModal } = useAuthStore()
+  const [otp, setOtp] = React.useState('')
+  const { email, setTitleModal, authenticationSuccess } = useAuthStore()
+  const { contextHolder, openNotification } = useToast()
+  const { mutate, isPending } = useMutation({ mutationFn: resetPassword })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values)
+    if (!email) {
+      openNotification({
+        message: 'Email not found',
+        type: 'error'
+      })
+      return
+    }
+
+    const data = {
+      ...values,
+      otp,
+      email
+    }
+
+    mutate(data, {
+      onSuccess: () => {
+        authenticationSuccess()
+      },
+      onError: (err: any) => {
+        const errorMessage =
+          err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+        openNotification({
+          message: errorMessage,
+          type: 'error'
+        })
+      }
+    })
   }
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
@@ -30,7 +63,7 @@ const ResetPassword = () => {
   }
 
   const onChange: OTPProps['onChange'] = (text) => {
-    console.log('onChange:', text)
+    setOtp(text)
   }
 
   const sharedProps: OTPProps = {
@@ -38,6 +71,7 @@ const ResetPassword = () => {
   }
   return (
     <div className="reset-password">
+      {contextHolder}
       <h2 className="reset-password-top">Reset password</h2>
 
       <Form
@@ -46,7 +80,12 @@ const ResetPassword = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="OTP" name="otp" className="field-wrapper">
+        <Form.Item
+          label="OTP"
+          name="otp"
+          className="field-wrapper"
+          rules={[{ required: true, message: 'Please input your OTP' }]}
+        >
           <Flex gap="middle" align="flex-start" vertical>
             <Input.OTP length={6} {...sharedProps} />
           </Flex>
@@ -56,7 +95,10 @@ const ResetPassword = () => {
           label="Password"
           name="password"
           className="field-wrapper"
-          rules={[{ min: 6, message: 'Please input your password!' }]}
+          rules={[
+            { required: true, message: 'Please input your password!' },
+            { min: 6, message: 'Please input your password!' }
+          ]}
         >
           <Input.Password placeholder="Enter your password" />
         </Form.Item>
@@ -66,6 +108,7 @@ const ResetPassword = () => {
           name="confirmPassword"
           className="field-wrapper"
           rules={[
+            { required: true, message: 'Please input your confirm password!' },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -92,7 +135,7 @@ const ResetPassword = () => {
         </div>
 
         <Form.Item>
-          <Button htmlType="submit" className="sign-button">
+          <Button htmlType="submit" className="sign-button" loading={isPending}>
             Reset password
           </Button>
         </Form.Item>

@@ -17,7 +17,8 @@ export type RequestForgotPassword = {
 export type RequestResetPassword = {
   password: string
   confirmPassword: string
-  otp: number
+  otp: string
+  email: string
 }
 
 export type RequestRefreshToken = {

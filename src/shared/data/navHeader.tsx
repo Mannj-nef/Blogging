@@ -37,3 +37,21 @@ export const NAVIGATE_USER = [
     href: ROUTER.POSTS
   }
 ]
+
+export const NAVIGATE_MANAGER = [
+  {
+    title: 'Your posts',
+    icon: <IconBook />,
+    href: ROUTER.POSTS
+  },
+  {
+    title: 'User Profile',
+    icon: <IconUser />,
+    href: ROUTER.USER
+  },
+  {
+    title: 'Logout',
+    icon: <IconUser />,
+    click: (callback: void) => callback
+  }
+]

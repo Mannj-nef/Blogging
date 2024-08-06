@@ -9,4 +9,6 @@ export type User = {
   biography: string
   createAt: string
   updateAt: string
+  phoneNumber: string
+  dateOfBirth: string
 }

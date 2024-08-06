@@ -9,9 +9,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'plus.unsplash.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co'
       }
     ]
   }
 }
-
+// https://i.ibb.co
 export default nextConfig

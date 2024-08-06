@@ -5,14 +5,12 @@ export enum STATUS_POST {
   PRIVATE = 'private'
 }
 
-export enum Category {
+export enum CATEGORY {
   FROND_END = 'frond-end',
   BACK_END = 'back-end',
   FULL_STACK = 'full-stack',
-  DEV_OPS = 'dev-ops',
   MOBILE = 'mobile',
-  GAME = 'game',
-  DESIGN = 'design'
+  GAME = 'game'
 }
 
 export type Post = {
@@ -21,7 +19,7 @@ export type Post = {
 
   title: string
   slug: string
-  category: Category
+  category: CATEGORY
   imageThumbnail: string
 
   content: string

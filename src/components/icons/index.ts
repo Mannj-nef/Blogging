@@ -1,3 +1,7 @@
 export { default as IconDashboard } from './Dashboard'
 export { default as IconSearch } from './Search'
 export { default as IconBack } from './Goback'
+export { default as IconPencilSquare } from './PencilSquare'
+export { default as IconBook } from './Book'
+export { default as IconUser } from './Use'
+export { default as IconCloseMark } from './CloseMark'

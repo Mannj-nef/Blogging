@@ -1,6 +1,7 @@
 import React from 'react'
 import Auth from '~/app/@auth'
-import Footer from '~/components/footer'
+import FormPost from '~/components/fomPosts'
+
 import Header from '~/components/header'
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -9,9 +10,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
 
       {children}
-
       <Auth />
-      <Footer />
+      <FormPost />
     </>
   )
 }

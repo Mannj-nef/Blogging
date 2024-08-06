@@ -1,6 +1,6 @@
 import { List } from 'antd'
 import { useRouter } from 'next/navigation'
-import { Category as CategoryType } from '~/types/post'
+import { CATEGORY as CategoryType } from '~/types/post'
 
 interface IProps {
   title?: string

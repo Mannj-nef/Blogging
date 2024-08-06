@@ -11,16 +11,10 @@ import Modal from '~/components/modal'
 import { getMe } from '~/services/user'
 import { QUERY_KEY } from '~/shared/constants'
 import useAuthStore from '~/store/authStore'
-import { getToken } from '~/utils/handleToken'
 
 const Auth = () => {
-  const {
-    isOpenModalAuth,
-    titleModal,
-    setIsOpenModalAuth,
-    setAuth,
-    setResetModalAuth
-  } = useAuthStore()
+  const { isOpenModalAuth, titleModal, setIsOpenModalAuth, setAuth } =
+    useAuthStore()
 
   const { data: responseUser, error } = useQuery({
     queryKey: [QUERY_KEY.GET_ME],
@@ -57,6 +51,7 @@ const Auth = () => {
   useEffect(() => {
     if (responseUser) {
       setAuth(responseUser.user)
+      setIsOpenModalAuth(false)
     }
 
     if (error) {

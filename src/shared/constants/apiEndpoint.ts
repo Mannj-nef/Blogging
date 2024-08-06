@@ -8,5 +8,8 @@ export const API_ENDPOINT = {
   LOG_OUT: '/auth/logout',
 
   // users
-  GET_ME: 'users/get-me'
+  GET_ME: 'users/get-me',
+
+  // posts
+  POSTS: '/posts'
 } as const

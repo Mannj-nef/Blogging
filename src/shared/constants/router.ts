@@ -1,4 +1,6 @@
 export const ROUTER = {
   HOME: '/',
-  BLOG: '/blog'
+  BLOG: '/blog',
+  USER: '/user',
+  POSTS: '/posts'
 } as const

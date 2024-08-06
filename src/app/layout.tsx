@@ -1,11 +1,12 @@
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import ReactQueryClientProvider from '~/components/reactQueryClientProvider'
+import { RootStyleRegistry } from '~/lib/rootStyleRegistry'
 
 import '~/styles/reset.scss'
 import '~/styles/variable.scss'
 import '~/styles/globals.scss'
-import { RootStyleRegistry } from '~/lib/rootStyleRegistry'
+import 'react-quill/dist/quill.snow.css'
 
 const inter = Inter({
   subsets: ['latin'],

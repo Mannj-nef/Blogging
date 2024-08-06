@@ -2,7 +2,8 @@
 // @ts-nocheck
 
 export enum EVENT_KEY {
-  GET_ME = 'user:get-me'
+  GET_ME = 'user:get-me',
+  USER_CONTROL = 'user:control'
 }
 
 export const sendEvent = <T>({

@@ -1,13 +1,13 @@
 import { Card } from 'antd'
+import dayjs from 'dayjs'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Post } from '~/types/post'
 interface ICardPost {
   post: Post
 }
 
 const CardPost = ({
-  post: { user, slug, title, imageThumbnail, updateAt }
+  post: { user, slug, title, imageThumbnail, updatedAt }
 }: ICardPost) => {
   return (
     <Card
@@ -22,10 +22,11 @@ const CardPost = ({
         />
       }
     >
-      <div>
+      <div className="card-post-info">
         <h3 className="text-line-2">{title}</h3>
         <p>
-          {updateAt} <span className="author">by {user.userName}</span>
+          {dayjs(updatedAt).format('DD/MM/YYYY')}{' '}
+          <span className="author">by {user.userName}</span>
         </p>
       </div>
     </Card>

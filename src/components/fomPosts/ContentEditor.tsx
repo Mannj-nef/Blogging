@@ -1,8 +1,6 @@
 'use client'
-import React, { useMemo, useState } from 'react'
-import { FullscreenOutlined } from '@ant-design/icons'
+import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import Modal from '~/components/modal'
 
 interface IProps {
   value: string
@@ -10,7 +8,6 @@ interface IProps {
 }
 
 const ContentEditor = ({ setValue, value }: IProps) => {
-  const [isShowFullContent, setIsShowFullContent] = useState(false)
   const ReactQuill = useMemo(
     () => dynamic(() => import('react-quill'), { ssr: false }),
     []
@@ -41,36 +38,16 @@ const ContentEditor = ({ setValue, value }: IProps) => {
         }}
       >
         <label htmlFor="image">Content</label>
-        <FullscreenOutlined
-          style={{ cursor: 'pointer' }}
-          onClick={() => setIsShowFullContent(true)}
-        />
       </div>
 
       <ReactQuill
-        style={{ height: '150px', marginBottom: 20 }}
+        className="react-quill-custom-class"
+        style={{ marginBottom: 20 }}
         modules={modules}
         theme="snow"
         value={value}
         onChange={setValue}
       />
-
-      <Modal
-        isModalOpen={isShowFullContent}
-        handleCancel={() => setIsShowFullContent(false)}
-        handleOk={() => setIsShowFullContent(false)}
-        closeIcon={false}
-      >
-        <div>
-          <ReactQuill
-            className="full-content-editor-quill"
-            modules={modules}
-            theme="snow"
-            value={value}
-            onChange={setValue}
-          />
-        </div>
-      </Modal>
     </>
   )
 }

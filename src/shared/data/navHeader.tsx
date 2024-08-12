@@ -1,4 +1,9 @@
-import { IconBook, IconPencilSquare, IconUser } from '~/components/icons'
+import {
+  IconBook,
+  IconLogOut,
+  IconPencilSquare,
+  IconUser
+} from '~/components/icons'
 import { ROUTER } from '../constants'
 
 export const NAVIGATORS = [
@@ -51,7 +56,7 @@ export const NAVIGATE_MANAGER = [
   },
   {
     title: 'Logout',
-    icon: <IconUser />,
+    icon: <IconLogOut />,
     click: (callback: void) => callback
   }
 ]

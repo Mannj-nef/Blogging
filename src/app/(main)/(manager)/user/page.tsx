@@ -9,6 +9,12 @@ import Image from 'next/image'
 import { IMAGES } from '~/shared/images'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { useMutation } from '@tanstack/react-query'
+import { updateProfile } from '~/services/user'
+import { MESSAGE } from '~/shared/constants'
+import useToast from '~/hooks/useToast'
+import { IconCamera, IconCloseMark } from '~/components/icons'
+import { useEffect } from 'react'
 dayjs.extend(customParseFormat)
 
 const dateFormat = 'YYYY/MM/DD'
@@ -16,6 +22,7 @@ const dateFormat = 'YYYY/MM/DD'
 type FieldType = {
   firstName: string
   lastName: string
+  email: string
   userName: string
   phoneNumber: number
   dateOfBirth: Date
@@ -24,11 +31,40 @@ type FieldType = {
 }
 
 const UserDetail = () => {
-  const { auth } = useAuthStore()
-  const { imageURL, handleUploadImage } = useUploadImage()
+  const { auth, setAuth } = useAuthStore()
+  const { imageURL, handleUploadImage, setImageUrl } = useUploadImage()
+  const { contextHolder, openNotification } = useToast()
+
+  const { mutate } = useMutation({
+    mutationFn: updateProfile
+  })
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log(values)
+    mutate(
+      {
+        ...values,
+        coverPhoto: imageURL,
+        phoneNumber: +values.phoneNumber,
+        dateOfBirth: dayjs(values.dateOfBirth).format('YYYY-MM-DD')
+      },
+      {
+        onSuccess: (data) => {
+          setAuth(data.user)
+          openNotification({
+            message: data.message,
+            type: 'success'
+          })
+        },
+        onError: (err: any) => {
+          const errorMessage =
+            err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+          openNotification({
+            message: errorMessage,
+            type: 'error'
+          })
+        }
+      }
+    )
   }
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
@@ -37,26 +73,53 @@ const UserDetail = () => {
     console.log('Failed:', errorInfo)
   }
 
+  useEffect(() => {
+    setImageUrl(auth?.coverPhoto || '')
+  }, [auth?.coverPhoto, setImageUrl])
+
   if (!auth) return null
 
   return (
     <div className="profile-wrapper">
+      {contextHolder}
       <div>
         <label className="profile-cover">
           {imageURL ? (
-            <Image fill src={imageURL} alt={auth.userName} />
+            <>
+              <Image fill src={imageURL} alt={auth.userName} />
+
+              <div className="wrapper-icon">
+                <IconCloseMark
+                  onClick={() => {
+                    setImageUrl('')
+                  }}
+                  style={{
+                    color: 'var(--color-light)',
+                    width: 26,
+                    opacity: 0.5
+                  }}
+                />
+              </div>
+            </>
           ) : (
             <>
               <input
                 type="file"
-                onChange={() => {}}
+                onChange={(e) => handleUploadImage({ event: e })}
                 style={{ display: 'none' }}
               />
-              <Image
-                fill
-                src={auth.coverPhoto || IMAGES.AVATAR_DEFAULT}
-                alt={auth.userName}
-              />
+
+              <div className="wrapper-icon">
+                <IconCamera
+                  style={{
+                    color: 'var(--color-light)',
+                    width: 26,
+                    opacity: 0.5
+                  }}
+                />
+              </div>
+
+              <Image fill src={IMAGES.AVATAR_DEFAULT} alt={auth.userName} />
             </>
           )}
         </label>
@@ -195,7 +258,7 @@ const UserDetail = () => {
             // value={value}
             // onChange={(e) => setValue(e.target.value)}
             // defaultValue={auth.biography}
-            minLength={256}
+            maxLength={256}
             style={{
               height: 20
             }}

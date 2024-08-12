@@ -12,3 +12,12 @@ export type RequestPostBase = {
 
 export type RequestPostCreate = RequestPostBase
 export type RequestPostUpdate = RequestPostBase
+
+export type RequestGetPost = {
+  title?: string
+  trending?: boolean
+  isLatest?: boolean
+  category?: CATEGORY
+  limit?: number
+  page?: number
+}

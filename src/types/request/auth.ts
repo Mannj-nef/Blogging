@@ -28,3 +28,15 @@ export type RequestRefreshToken = {
 export type RequestLogOut = {
   refreshToken: string
 }
+
+export type RequestUpdateProfile = {
+  firstName: string
+  lastName: string
+  email: string
+  userName: string
+  phoneNumber: number
+  dateOfBirth: string
+  city: string
+  biography: string
+  coverPhoto: string
+}

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Button from '~/components/button'
+import { IMAGES } from '~/shared/images'
 import { Post } from '~/types/post'
 
 interface IProps {
@@ -12,7 +13,7 @@ const TrendingCard = ({ post }: IProps) => {
       <div className="trending-item-overlay"></div>
 
       <Image
-        src={post.imageThumbnail}
+        src={post.imageThumbnail || IMAGES.IMAGE_DEFAULT}
         alt={post.title}
         width={800}
         height={500}

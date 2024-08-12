@@ -2,20 +2,23 @@
 
 import useAuthStore from '~/store/authStore'
 import Navbar from './modules/Navbar'
-import './style.scss'
 import { useRouter } from 'next/navigation'
 import { ROUTER } from '~/shared/constants'
 import { useEffect } from 'react'
+import useToken from '~/hooks/useToken'
+
+import './style.scss'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { auth } = useAuthStore()
+  const { auth, setAuth } = useAuthStore()
+  const token = useToken()
   const router = useRouter()
 
   useEffect(() => {
-    if (!auth) {
+    if (!token && !auth) {
       router.push(ROUTER.HOME)
     }
-  }, [auth, router])
+  }, [auth, router, token])
 
   if (!auth) return null
 

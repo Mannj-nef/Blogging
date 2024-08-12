@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { IMAGES } from '~/shared/images'
 import { Post } from '~/types/post'
 
 interface IProps {
@@ -10,7 +11,7 @@ const CardLatePost = ({ post }: IProps) => {
     <div className="card-late-post-item">
       <div className="image-wrapper">
         <Image
-          src={post.imageThumbnail}
+          src={post.imageThumbnail || IMAGES.IMAGE_DEFAULT}
           alt={post.slug}
           width={800}
           height={800}

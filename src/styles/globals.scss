@@ -5,6 +5,22 @@
   padding: 0 20px;
 }
 
+* {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    margin-top: 30px;
+    background-color: #c1c1c1;
+    border-radius: 50px;
+  }
+}
+
 .text-line-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -24,4 +40,176 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.main-post {
+  &-content {
+    display: flex;
+    gap: 30px;
+
+    .author {
+      color: var(--color-link);
+    }
+
+    &-left {
+      .main-post-content-top-left {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        height: 50px;
+        margin-bottom: 30px;
+
+        span {
+          --size: 20px;
+          display: inline-block;
+          width: var(--size);
+          height: var(--size);
+        }
+
+        h3 {
+          text-transform: uppercase;
+          a {
+            color: var(--color-text-secondary);
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .card-post {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .ant-card-body {
+          display: flex;
+          flex: 1;
+        }
+
+        .card-post-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
+        }
+        h3 {
+          margin-bottom: 10px;
+          color: var(--color-text-primary);
+        }
+
+        p {
+          color: var(--color-text-primary);
+        }
+
+        a {
+          color: var(--color-link);
+          cursor: pointer;
+        }
+
+        &:hover {
+          transform: translate(-10px, -10px);
+          transition: all 0.5s linear;
+          box-shadow:
+            rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+            rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+        &:not(:hover) {
+          transform: translate(0, 0);
+          transition: all 0.5s linear;
+        }
+      }
+    }
+
+    &-right {
+      .main-post-search {
+        height: 50px;
+        margin-bottom: 30px;
+        background-color: white;
+      }
+
+      .main-post-category {
+        margin-bottom: 30px;
+        ul {
+          margin-top: 10px;
+          max-height: 400px;
+          overflow-y: scroll;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+
+          li {
+            padding: 4px 12px !important;
+            border: none;
+            p {
+              font-family: "Inter", sans-serif !important;
+              color: var(--color-text-primary) !important;
+              text-transform: capitalize;
+              opacity: 0.8;
+              font-size: 16px;
+              cursor: pointer;
+
+              &:hover {
+                opacity: 1;
+              }
+
+              &.active {
+                opacity: 1;
+                font-weight: 700;
+                text-decoration: u;
+              }
+            }
+          }
+        }
+      }
+
+      .late-post {
+        h2 {
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+
+        .list-post-wrapper {
+          margin-top: 20px;
+          display: flex;
+          gap: 15px;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          flex-direction: column;
+
+          .card-late-post-item {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            padding-right: 20px;
+
+            .image-wrapper {
+              --size: 100px;
+              width: var(--size);
+              height: var(--size);
+              flex-shrink: 0;
+
+              img {
+                border-radius: 12px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            .post-info {
+              p,
+              a {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,19 +1,30 @@
-import { POSTS } from '~/shared/data/posts'
 import CardLatePost from './Card'
 import Link from 'next/link'
-import { ROUTER } from '~/shared/constants'
+import { QUERY_KEY, ROUTER } from '~/shared/constants'
+import { useQuery } from '@tanstack/react-query'
+import { getPosts } from '~/services/posts'
 
 const LatePost = () => {
+  const { data } = useQuery({
+    queryKey: [QUERY_KEY.LATEST_POSTS],
+    queryFn: () => getPosts({ isLatest: true })
+  })
   return (
     <div className="late-post">
-      <h2>Late Posts</h2>
+      <h2>Latest Posts</h2>
 
       <div className="list-post-wrapper">
-        {POSTS.map((post) => (
-          <Link href={`${ROUTER.BLOG}/${post.slug}`} key={post.id}>
-            <CardLatePost post={post} />
-          </Link>
-        ))}
+        {data && data.posts?.length > 0
+          ? data.posts.map((post) => (
+              <Link
+                href={`${ROUTER.BLOG}/${post.slug} ${post.id}`}
+                key={post.id}
+                scroll={false}
+              >
+                <CardLatePost post={post} />
+              </Link>
+            ))
+          : null}
       </div>
     </div>
   )

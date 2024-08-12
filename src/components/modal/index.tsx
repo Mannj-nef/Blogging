@@ -8,6 +8,7 @@ interface IProps {
   handleOk: () => void
   handleCancel: () => void
   closeIcon?: boolean
+  classNameCustom?: string
 }
 
 const Modal = ({
@@ -15,7 +16,8 @@ const Modal = ({
   isModalOpen,
   handleOk,
   handleCancel,
-  closeIcon = true
+  closeIcon = true,
+  classNameCustom = ''
 }: IProps) => {
   return (
     <ModalAntd
@@ -24,6 +26,7 @@ const Modal = ({
       onCancel={handleCancel}
       footer={null}
       closeIcon={closeIcon}
+      className={classNameCustom}
     >
       {children}
     </ModalAntd>

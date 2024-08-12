@@ -10,7 +10,6 @@ const Home = () => {
       <Hero />
       <TrendingPosts />
       <MainPost />
-      <Footer />
     </div>
   )
 }

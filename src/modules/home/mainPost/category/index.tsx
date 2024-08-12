@@ -1,14 +1,23 @@
 import { List } from 'antd'
-import { useRouter } from 'next/navigation'
+import Button from '~/components/button'
 import { CATEGORY as CategoryType } from '~/types/post'
 
 interface IProps {
   title?: string
   category: CategoryType[]
+  categorySelected?: CategoryType
+  onSearch: (title?: CategoryType) => void
 }
 
-const Category = ({ category, title = 'ALL CATEGORIES' }: IProps) => {
-  const router = useRouter()
+const Category = ({
+  category,
+  title = 'ALL CATEGORIES',
+  onSearch,
+  categorySelected
+}: IProps) => {
+  const handleSearchCategory = (value: CategoryType) => {
+    onSearch(value)
+  }
 
   return (
     <div className="main-post-category">
@@ -22,9 +31,8 @@ const Category = ({ category, title = 'ALL CATEGORIES' }: IProps) => {
             <List.Item.Meta
               title={
                 <p
-                  onClick={() =>
-                    router.push(`/?category=${item}`, { scroll: false })
-                  }
+                  className={`${categorySelected === item ? 'active' : ''}`}
+                  onClick={() => handleSearchCategory(item)}
                 >
                   {' '}
                   - {item}
@@ -34,6 +42,12 @@ const Category = ({ category, title = 'ALL CATEGORIES' }: IProps) => {
           </List.Item>
         )}
       />
+      <div
+        style={{ cursor: 'pointer', marginLeft: 'auto', width: 'fit-content' }}
+        onClick={() => onSearch()}
+      >
+        <Button>Clear</Button>
+      </div>
     </div>
   )
 }

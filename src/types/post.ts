@@ -6,16 +6,29 @@ export enum STATUS_POST {
 }
 
 export enum CATEGORY {
-  FROND_END = 'frond-end',
+  FRONT_END = 'front-end',
   BACK_END = 'back-end',
   FULL_STACK = 'full-stack',
   MOBILE = 'mobile',
   GAME = 'game'
 }
 
+export enum REACTION_TYPE {
+  LIKE = 'like',
+  LOVE = 'love',
+  CRUSH = 'crush',
+  HAHA = 'haha',
+  WOW = 'wow',
+  SAD = 'sad',
+  ANGRY = 'angry'
+}
+
 export type Post = {
   id: string
-  user: User
+  user: Pick<
+    User,
+    'id' | 'email' | 'firstName' | 'lastName' | 'coverPhoto' | 'userName'
+  >
 
   title: string
   slug: string
@@ -28,5 +41,13 @@ export type Post = {
   popularity: number
 
   createdAt: string
-  updateAt: string
+  updatedAt: string
+}
+
+export type PostDetail = Post & {
+  commentTotal: number
+  reaction: {
+    total: number
+    type: REACTION_TYPE | null
+  }
 }

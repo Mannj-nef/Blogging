@@ -1,10 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
-import { ENV } from '~/shared/constants'
+import axios from 'axios'
 import { handelRequestPrivate } from './handleRequest'
 import { handleErrorResponse, handleResponseAuth } from './response'
 
 const httpPrivate = axios.create({
-  baseURL: ENV.BASE_API_URL_FULL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   },

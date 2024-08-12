@@ -21,7 +21,7 @@ const useUploadImage = () => {
     try {
       setIsLoading(true)
       const { data: response } = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${ENV.NEXT_PUBLIC_IMAGE_BB_KEY}`,
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_BASE_URL}`,
         bodyFormData
       )
       const imageData = response.data

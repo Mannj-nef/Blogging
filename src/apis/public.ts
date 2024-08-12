@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { ENV } from '~/shared/constants'
 import { handleErrorResponse, handleResponseAuth } from './response'
 
 const httpPublic = axios.create({
-  baseURL: ENV.BASE_API_URL_FULL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   },

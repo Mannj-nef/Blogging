@@ -23,7 +23,6 @@ type FieldType = {
   firstName: string
   lastName: string
   email: string
-  userName: string
   phoneNumber: number
   dateOfBirth: Date
   city: string
@@ -43,9 +42,12 @@ const UserDetail = () => {
     mutate(
       {
         ...values,
+        userName: `${values.firstName.toLowerCase()}${values.lastName.toLowerCase()}`,
         coverPhoto: imageURL,
         phoneNumber: +values.phoneNumber,
-        dateOfBirth: dayjs(values.dateOfBirth).format('YYYY-MM-DD')
+        dateOfBirth: values.dateOfBirth
+          ? dayjs(values.dateOfBirth).format('YYYY-MM-DD')
+          : ''
       },
       {
         onSuccess: (data) => {

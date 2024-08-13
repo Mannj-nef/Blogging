@@ -10,7 +10,7 @@ import useToken from '~/hooks/useToken'
 import './style.scss'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { auth, setAuth } = useAuthStore()
+  const { auth } = useAuthStore()
   const token = useToken()
   const router = useRouter()
 

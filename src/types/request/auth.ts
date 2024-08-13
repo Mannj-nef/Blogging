@@ -30,13 +30,13 @@ export type RequestLogOut = {
 }
 
 export type RequestUpdateProfile = {
-  firstName: string
-  lastName: string
+  firstName?: string
+  lastName?: string
   email: string
-  userName: string
-  phoneNumber: number
-  dateOfBirth: string
-  city: string
-  biography: string
-  coverPhoto: string
+  userName?: string
+  phoneNumber?: number
+  dateOfBirth?: string
+  city?: string
+  biography?: string
+  coverPhoto?: string
 }

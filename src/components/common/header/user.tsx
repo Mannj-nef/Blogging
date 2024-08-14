@@ -1,5 +1,5 @@
 'use client'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 import Button from '../button'
 import Avatar from './avatar'
 
@@ -16,7 +16,7 @@ const User = () => {
       {auth ? (
         <Avatar />
       ) : (
-        <Button className="btn-to-sign" onClick={handleOpenModalSingIn}>
+        <Button className='btn-to-sign' onClick={handleOpenModalSingIn}>
           Sign in
         </Button>
       )}

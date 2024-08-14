@@ -9,9 +9,6 @@ export const getMe = async () => {
 }
 
 export const updateProfile = async (payload: RequestUpdateProfile) => {
-  const { data } = await httpPrivate.patch<ResponseUser>(
-    API_ENDPOINT.UPDATE_PROFILE,
-    payload
-  )
+  const { data } = await httpPrivate.patch<ResponseUser>(API_ENDPOINT.UPDATE_PROFILE, payload)
   return data
 }

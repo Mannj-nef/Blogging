@@ -16,11 +16,9 @@ const Search = ({ onSearch }: IProps) => {
 
   return (
     <Input
-      placeholder="search"
-      customClass="main-post-search"
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-        handleSearch(e.target.value)
-      }
+      placeholder='search'
+      customClass='main-post-search'
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
     >
       <IconSearch />
     </Input>

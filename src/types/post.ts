@@ -25,10 +25,7 @@ export enum REACTION_TYPE {
 
 export type Post = {
   id: string
-  user: Pick<
-    User,
-    'id' | 'email' | 'firstName' | 'lastName' | 'coverPhoto' | 'userName'
-  >
+  user: Pick<User, 'id' | 'email' | 'firstName' | 'lastName' | 'coverPhoto' | 'userName'>
 
   title: string
   slug: string

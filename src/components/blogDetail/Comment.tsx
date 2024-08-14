@@ -1,22 +1,17 @@
 'use client'
 import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 import { Avatar as AntAvatar, Form, FormProps, Input, Modal } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import {
-  createComment,
-  deleteComment,
-  getCommentByPostId,
-  updateComment
-} from '~/services/comment'
+import { createComment, deleteComment, getCommentByPostId, updateComment } from '~/apis/comment'
 import { MESSAGE, QUERY_KEY } from '~/shared/constants'
 import { Comment } from '~/types/comment'
 import dayjs from 'dayjs'
 import useToast from '~/hooks/useToast'
-import usePostStore from '~/store/postStore'
+import usePostStore from '~/store/zustand/postStore'
 
 interface IProps {
   postId: string
@@ -49,16 +44,8 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
   const [form] = Form.useForm<Comment>()
 
   const { data } = useQuery({
-    queryKey: [
-      QUERY_KEY.GET_COMMENT_BY_POST,
-      limit,
-      page,
-      postId,
-      toggleFetchComment,
-      comments
-    ],
-    queryFn: () =>
-      getCommentByPostId({ limit: `${limit}`, page: `${page}`, postId })
+    queryKey: [QUERY_KEY.GET_COMMENT_BY_POST, limit, page, postId, toggleFetchComment, comments],
+    queryFn: () => getCommentByPostId({ limit: `${limit}`, page: `${page}`, postId })
   })
 
   const { mutate } = useMutation({
@@ -106,8 +93,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
         },
 
         onError: (err: any) => {
-          const errorMessage =
-            err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+          const errorMessage = err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
           openNotification({
             message: errorMessage,
             type: 'error'
@@ -117,9 +103,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
     )
   }
 
-  const handelEditComment: FormProps<{ content: string }>['onFinish'] = (
-    value
-  ) => {
+  const handelEditComment: FormProps<{ content: string }>['onFinish'] = (value) => {
     if (!value) return
     mutateUpdateComment(
       {
@@ -136,8 +120,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
           })
         },
         onError: (err: any) => {
-          const errorMessage =
-            err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+          const errorMessage = err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
           openNotification({
             message: errorMessage,
             type: 'error'
@@ -159,8 +142,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
             },
 
             onError: (err: any) => {
-              const errorMessage =
-                err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+              const errorMessage = err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
               openNotification({
                 message: errorMessage,
                 type: 'error'
@@ -180,44 +162,24 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
   }, [data])
 
   return (
-    <div
-      className="modal-comment"
-      style={{ display: isModalOpen ? 'block' : 'none' }}
-    >
+    <div className='modal-comment' style={{ display: isModalOpen ? 'block' : 'none' }}>
       {contextHolder}
-      <div className="layout" onClick={handleCancel}></div>
+      <div className='layout' onClick={handleCancel}></div>
 
-      <div className="main-comment">
+      <div className='main-comment'>
         <div>
-          <div className="input-comment-wrapper">
+          <div className='input-comment-wrapper'>
             {auth?.coverPhoto ? (
-              <div className="image-wrapper">
-                <Image
-                  src={auth.coverPhoto}
-                  width={32}
-                  height={32}
-                  alt="avatar"
-                />
+              <div className='image-wrapper'>
+                <Image src={auth.coverPhoto} width={32} height={32} alt='avatar' />
               </div>
             ) : (
-              <AntAvatar
-                style={{ flexShrink: 0 }}
-                size="default"
-                icon={<UserOutlined />}
-              />
+              <AntAvatar style={{ flexShrink: 0 }} size='default' icon={<UserOutlined />} />
             )}
 
-            <Form
-              form={form}
-              onFinish={onFinish}
-              autoComplete="off"
-              style={{ flex: 1 }}
-            >
-              <Form.Item name="content" className="input-comment">
-                <Input
-                  size="large"
-                  placeholder="Enter your new comment"
-                ></Input>
+            <Form form={form} onFinish={onFinish} autoComplete='off' style={{ flex: 1 }}>
+              <Form.Item name='content' className='input-comment'>
+                <Input size='large' placeholder='Enter your new comment'></Input>
               </Form.Item>
             </Form>
           </div>
@@ -233,30 +195,21 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
           }}
         ></div>
 
-        <div className="list-comment">
+        <div className='list-comment'>
           {comments.length > 0 &&
             comments.map((commentItem) => (
-              <div key={commentItem.id} className="comment-item">
-                <div className="top">
+              <div key={commentItem.id} className='comment-item'>
+                <div className='top'>
                   {commentItem.user.coverPhoto ? (
-                    <div className="image-wrapper">
-                      <Image
-                        src={commentItem.user.coverPhoto}
-                        width={32}
-                        height={32}
-                        alt="avatar"
-                      />
+                    <div className='image-wrapper'>
+                      <Image src={commentItem.user.coverPhoto} width={32} height={32} alt='avatar' />
                     </div>
                   ) : (
-                    <AntAvatar
-                      style={{ flexShrink: 0 }}
-                      size="default"
-                      icon={<UserOutlined />}
-                    />
+                    <AntAvatar style={{ flexShrink: 0 }} size='default' icon={<UserOutlined />} />
                   )}
 
-                  <div className="info-user">
-                    <p className="user-name">{commentItem.user.userName}</p>
+                  <div className='info-user'>
+                    <p className='user-name'>{commentItem.user.userName}</p>
                     <p>{dayjs(commentItem.updateAt).format('DD/MM/YYYY')}</p>
                   </div>
                 </div>
@@ -265,7 +218,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                   <Form
                     style={{ marginLeft: 55, marginTop: 5 }}
                     onFinish={handelEditComment}
-                    autoComplete="off"
+                    autoComplete='off'
                     fields={[
                       {
                         name: ['content'],
@@ -273,24 +226,18 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                       }
                     ]}
                   >
-                    <Form.Item name="content" className="input-comment">
-                      <Input
-                        style={{ height: 48 }}
-                        size="large"
-                        autoFocus
-                        placeholder="Enter your new comment"
-                      ></Input>
+                    <Form.Item name='content' className='input-comment'>
+                      <Input style={{ height: 48 }} size='large' autoFocus placeholder='Enter your new comment'></Input>
                     </Form.Item>
                   </Form>
                 ) : (
-                  <div style={{ marginLeft: 55 }} className="content">
+                  <div style={{ marginLeft: 55 }} className='content'>
                     {commentItem.content}
                   </div>
                 )}
 
-                <div className="action">
-                  {replyComment.isReply &&
-                  replyComment.id === commentItem.id ? (
+                <div className='action'>
+                  {replyComment.isReply && replyComment.id === commentItem.id ? (
                     <span
                       style={{
                         cursor: 'pointer',
@@ -332,8 +279,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                         justifyContent: 'end'
                       }}
                     >
-                      {editComment.isEdit &&
-                      editComment.id === commentItem.id ? (
+                      {editComment.isEdit && editComment.id === commentItem.id ? (
                         <span
                           style={{
                             cursor: 'pointer',
@@ -383,18 +329,9 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
 
                 {/* REPLY */}
                 {replyComment.isReply && replyComment.id === commentItem.id && (
-                  <Form
-                    style={{ marginLeft: 55, marginTop: 5 }}
-                    onFinish={onFinish}
-                    autoComplete="off"
-                  >
-                    <Form.Item name="content" className="input-comment">
-                      <Input
-                        style={{ height: 48 }}
-                        size="large"
-                        autoFocus
-                        placeholder="Enter your comment"
-                      ></Input>
+                  <Form style={{ marginLeft: 55, marginTop: 5 }} onFinish={onFinish} autoComplete='off'>
+                    <Form.Item name='content' className='input-comment'>
+                      <Input style={{ height: 48 }} size='large' autoFocus placeholder='Enter your comment'></Input>
                     </Form.Item>
                   </Form>
                 )}
@@ -402,32 +339,19 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
 
                 {commentItem.replies.length > 0 &&
                   commentItem.replies.map((reply) => (
-                    <div
-                      key={reply.id}
-                      className="reply-item comment-item"
-                      style={{ marginLeft: 55 }}
-                    >
+                    <div key={reply.id} className='reply-item comment-item' style={{ marginLeft: 55 }}>
                       <div>
-                        <div className="top">
+                        <div className='top'>
                           {reply.user.coverPhoto ? (
-                            <div className="image-wrapper">
-                              <Image
-                                src={reply.user.coverPhoto}
-                                width={32}
-                                height={32}
-                                alt="avatar"
-                              />
+                            <div className='image-wrapper'>
+                              <Image src={reply.user.coverPhoto} width={32} height={32} alt='avatar' />
                             </div>
                           ) : (
-                            <AntAvatar
-                              style={{ flexShrink: 0 }}
-                              size="default"
-                              icon={<UserOutlined />}
-                            />
+                            <AntAvatar style={{ flexShrink: 0 }} size='default' icon={<UserOutlined />} />
                           )}
 
-                          <div className="info-user">
-                            <p className="user-name">{reply.user.userName}</p>
+                          <div className='info-user'>
+                            <p className='user-name'>{reply.user.userName}</p>
                             <p>{dayjs(reply.updateAt).format('DD/MM/YYYY')}</p>
                           </div>
                         </div>
@@ -437,7 +361,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                         <Form
                           style={{ marginLeft: 55, marginTop: 5 }}
                           onFinish={handelEditComment}
-                          autoComplete="off"
+                          autoComplete='off'
                           fields={[
                             {
                               name: ['content'],
@@ -445,22 +369,22 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                             }
                           ]}
                         >
-                          <Form.Item name="content" className="input-comment">
+                          <Form.Item name='content' className='input-comment'>
                             <Input
                               style={{ height: 48 }}
-                              size="large"
+                              size='large'
                               autoFocus
-                              placeholder="Enter your new comment"
+                              placeholder='Enter your new comment'
                             ></Input>
                           </Form.Item>
                         </Form>
                       ) : (
-                        <div style={{ marginLeft: 55 }} className="content">
+                        <div style={{ marginLeft: 55 }} className='content'>
                           {reply.content}
                         </div>
                       )}
 
-                      <div className="action">
+                      <div className='action'>
                         {auth?.id === reply.userId ? (
                           <div
                             style={{
@@ -469,8 +393,7 @@ const CommentPosts = ({ postId, isModalOpen, setIsShowModal }: IProps) => {
                               justifyContent: 'end'
                             }}
                           >
-                            {editComment.isEdit &&
-                            editComment.id === reply.id ? (
+                            {editComment.isEdit && editComment.id === reply.id ? (
                               <span
                                 style={{
                                   cursor: 'pointer',

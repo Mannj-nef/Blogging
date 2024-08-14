@@ -9,22 +9,17 @@ interface IProps {
   onSearch: (title?: CategoryType) => void
 }
 
-const Category = ({
-  category,
-  title = 'ALL CATEGORIES',
-  onSearch,
-  categorySelected
-}: IProps) => {
+const Category = ({ category, title = 'ALL CATEGORIES', onSearch, categorySelected }: IProps) => {
   const handleSearchCategory = (value: CategoryType) => {
     onSearch(value)
   }
 
   return (
-    <div className="main-post-category">
+    <div className='main-post-category'>
       <h2>{title}</h2>
 
       <List
-        itemLayout="horizontal"
+        itemLayout='horizontal'
         dataSource={category}
         renderItem={(item) => (
           <List.Item>
@@ -42,10 +37,7 @@ const Category = ({
           </List.Item>
         )}
       />
-      <div
-        style={{ cursor: 'pointer', marginLeft: 'auto', width: 'fit-content' }}
-        onClick={() => onSearch()}
-      >
+      <div style={{ cursor: 'pointer', marginLeft: 'auto', width: 'fit-content' }} onClick={() => onSearch()}>
         <Button>Clear</Button>
       </div>
     </div>

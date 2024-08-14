@@ -4,15 +4,15 @@ import React, { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { Avatar as AntAvatar } from 'antd'
 import { useMutation } from '@tanstack/react-query'
 import { UserOutlined } from '@ant-design/icons'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 import { EVENT_KEY, sendEvent } from '~/utils/even'
 import Button from '~/components/common/button'
-import { logOut } from '~/services/auth'
+import { logOut } from '~/apis/auth'
 import useToken from '~/hooks/useToken'
 import useToast from '~/hooks/useToast'
 import { MESSAGE } from '~/shared/constants'
 import { NAVIGATE_USER } from '~/shared/data'
-import usePostStore from '~/store/postStore'
+import usePostStore from '~/store/zustand/postStore'
 
 const Avatar = () => {
   const token = useToken()
@@ -69,22 +69,18 @@ const Avatar = () => {
   useEffect
 
   return (
-    <div className="avatar">
+    <div className='avatar'>
       {contextHolder}
       {auth?.coverPhoto ? (
-        <div className="image-wrapper" onClick={(e) => handleShow(e)}>
-          <Image src={auth.coverPhoto} width={32} height={32} alt="avatar" />
+        <div className='image-wrapper' onClick={(e) => handleShow(e)}>
+          <Image src={auth.coverPhoto} width={32} height={32} alt='avatar' />
         </div>
       ) : (
-        <AntAvatar
-          size="default"
-          icon={<UserOutlined />}
-          onClick={(e) => handleShow(e as MouseEvent<HTMLElement>)}
-        />
+        <AntAvatar size='default' icon={<UserOutlined />} onClick={(e) => handleShow(e as MouseEvent<HTMLElement>)} />
       )}
 
       {show ? (
-        <div className="avatar-content">
+        <div className='avatar-content'>
           <div
             style={{
               display: 'flex',
@@ -95,24 +91,16 @@ const Avatar = () => {
             {NAVIGATE_USER.map((item) => {
               if (item.href) {
                 return (
-                  <Link
-                    key={item.title}
-                    className="content-item"
-                    href={item.href}
-                  >
-                    <div className="icon">{item.icon}</div>
+                  <Link key={item.title} className='content-item' href={item.href}>
+                    <div className='icon'>{item.icon}</div>
                     <p>{item.title}</p>
                   </Link>
                 )
               }
 
               return (
-                <div
-                  key={item.title}
-                  className="content-item"
-                  onClick={() => item.click(setIsShowModal(true))}
-                >
-                  <div className="icon">{item.icon}</div>
+                <div key={item.title} className='content-item' onClick={() => item.click(setIsShowModal(true))}>
+                  <div className='icon'>{item.icon}</div>
                   <p>{item.title}</p>
                 </div>
               )

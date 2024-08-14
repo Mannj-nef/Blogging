@@ -13,11 +13,7 @@ interface IUseToast {
 const useToast = () => {
   const [api, contextHolder] = notification.useNotification()
 
-  const openNotification = ({
-    message,
-    placement = 'topRight',
-    type = 'info'
-  }: IUseToast) => {
+  const openNotification = ({ message, placement = 'topRight', type = 'info' }: IUseToast) => {
     const toastInfo = {
       message,
       description: '',

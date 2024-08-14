@@ -27,8 +27,7 @@ const usePostStore = create<PostStore>((set) => ({
   setYourPosts: (yourPosts?: Post[]) => set(() => ({ yourPosts })),
   setIsShowModal: (isShowModal: boolean) => set(() => ({ isShowModal })),
   setPostDetail: (postDetail?: PostDetail) => set(() => ({ postDetail })),
-  setPostDetailUpdate: (postDetailUpdate?: RequestPostBase) =>
-    set(() => ({ postDetailUpdate }))
+  setPostDetailUpdate: (postDetailUpdate?: RequestPostBase) => set(() => ({ postDetailUpdate }))
 }))
 
 export default usePostStore

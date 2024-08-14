@@ -1,20 +1,14 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useEffect } from 'react'
-import {
-  ForgotPassword,
-  ResetPassword,
-  SignIn,
-  SignUp
-} from '~/components/common/auth'
+import { ForgotPassword, ResetPassword, SignIn, SignUp } from '~/components/common/auth'
 import Modal from '~/components/common/modal'
-import { getMe } from '~/services/user'
+import { getMe } from '~/apis/user'
 import { QUERY_KEY } from '~/shared/constants'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 
 const Auth = () => {
-  const { isOpenModalAuth, titleModal, setIsOpenModalAuth, setAuth } =
-    useAuthStore()
+  const { isOpenModalAuth, titleModal, setIsOpenModalAuth, setAuth } = useAuthStore()
 
   const { data: responseUser, error } = useQuery({
     queryKey: [QUERY_KEY.GET_ME],
@@ -61,11 +55,7 @@ const Auth = () => {
 
   return (
     <>
-      <Modal
-        isModalOpen={isOpenModalAuth}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      >
+      <Modal isModalOpen={isOpenModalAuth} handleOk={handleOk} handleCancel={handleCancel}>
         {renderModal()}
       </Modal>
     </>

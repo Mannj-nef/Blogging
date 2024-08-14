@@ -8,8 +8,8 @@ interface IProps {
 
 const ContentPostDetail = ({ blogDetail }: IProps) => {
   return (
-    <div className="post-content">
-      <div className="entry-content">{parse(blogDetail?.content || '')}</div>
+    <div className='post-content'>
+      <div className='entry-content'>{parse(blogDetail?.content || '')}</div>
     </div>
   )
 }

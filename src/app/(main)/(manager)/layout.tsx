@@ -1,6 +1,6 @@
 'use client'
 
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 import Navbar from './modules/Navbar'
 import { useRouter } from 'next/navigation'
 import { ROUTER } from '~/shared/constants'
@@ -23,12 +23,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   if (!auth) return null
 
   return (
-    <div className="container wrapper-layout-manager">
-      <div className="content-left">
+    <div className='container wrapper-layout-manager'>
+      <div className='content-left'>
         <Navbar />
       </div>
 
-      <div className="content-right">{children}</div>
+      <div className='content-right'>{children}</div>
     </div>
   )
 }

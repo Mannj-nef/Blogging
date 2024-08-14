@@ -1,57 +1,57 @@
 .ant-modal-content {
-    width: 600px !important;
-    background-color: var(--color-primary) !important;
+  width: 600px !important;
+  background-color: var(--color-primary) !important;
 }
 
 .full-content-editor-quill {
-    .ql-container {
-        min-height: 70vh;
-    }
+  .ql-container {
+    min-height: 70vh;
+  }
 }
 
 .form-post {
-    .title {
-        text-align: center;
+  .title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .content-post {
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #fff;
+
+    &-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+
+      .user-name {
+        font-weight: 600;
+      }
+    }
+
+    form {
+      .field-wrapper {
+        input,
+        :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-affix-wrapper {
+          padding: 10px;
+        }
+      }
+
+      .react-quill-custom-class {
+        .ql-editor {
+          min-height: 150px;
+        }
+      }
+
+      label {
+        color: var(--color-text-primary) !important;
+        display: block;
         margin-bottom: 10px;
+        font-size: large;
+        font-weight: 600;
+      }
     }
-
-    .content-post {
-        padding: 20px;
-        border-radius: 4px;
-        background-color: #fff;
-
-        &-top {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-
-            .user-name {
-                font-weight: 600;
-            }
-        }
-
-        form {
-            .field-wrapper {
-                input,
-                :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-affix-wrapper {
-                    padding: 10px;
-                }
-            }
-
-            .react-quill-custom-class {
-                .ql-editor {
-                    min-height: 150px;
-                }
-            }
-
-            label {
-                color: var(--color-text-primary) !important;
-                display: block;
-                margin-bottom: 10px;
-                font-size: large;
-                font-weight: 600;
-            }
-        }
-    }
+  }
 }

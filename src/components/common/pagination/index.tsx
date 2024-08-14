@@ -10,21 +10,10 @@ interface IProps {
   pageSize?: number
 }
 
-const Pagination = ({
-  onChange,
-  classCustom = '',
-  currantPage,
-  totalPage,
-  pageSize = 4
-}: IProps) => {
+const Pagination = ({ onChange, classCustom = '', currantPage, totalPage, pageSize = 4 }: IProps) => {
   return (
     <div className={`pagination ${classCustom}`}>
-      <Paging
-        pageSize={pageSize}
-        defaultCurrent={currantPage}
-        total={totalPage}
-        onChange={onChange}
-      />
+      <Paging pageSize={pageSize} defaultCurrent={currantPage} total={totalPage} onChange={onChange} />
     </div>
   )
 }

@@ -1,12 +1,8 @@
 import { create } from 'zustand'
-import { getMe } from '~/services/user'
+import { getMe } from '~/apis/user'
 import { User } from '~/types/user'
 
-export type TittleModal =
-  | 'LOGIN'
-  | 'REGISTER'
-  | 'FORGOT_PASSWORD'
-  | 'RESET_PASSWORD'
+export type TittleModal = 'LOGIN' | 'REGISTER' | 'FORGOT_PASSWORD' | 'RESET_PASSWORD'
 
 type AuthState = {
   isOpenModalAuth: boolean

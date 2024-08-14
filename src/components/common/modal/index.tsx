@@ -11,14 +11,7 @@ interface IProps {
   classNameCustom?: string
 }
 
-const Modal = ({
-  children,
-  isModalOpen,
-  handleOk,
-  handleCancel,
-  closeIcon = true,
-  classNameCustom = ''
-}: IProps) => {
+const Modal = ({ children, isModalOpen, handleOk, handleCancel, closeIcon = true, classNameCustom = '' }: IProps) => {
   return (
     <ModalAntd
       open={isModalOpen}

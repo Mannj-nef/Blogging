@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import useToast from '~/hooks/useToast'
 import { useMutation } from '@tanstack/react-query'
-import { logOut } from '~/services/auth'
+import { logOut } from '~/apis/auth'
 import useToken from '~/hooks/useToken'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 import { MESSAGE } from '~/shared/constants'
 import { IconPencilSquare } from '~/components/common/icons'
-import usePostStore from '~/store/postStore'
+import usePostStore from '~/store/zustand/postStore'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -42,10 +42,10 @@ const Navbar = () => {
   }
 
   return (
-    <div className="manage-nav">
+    <div className='manage-nav'>
       {contextHolder}
-      <div className="content-item" onClick={() => setIsShowModal(true)}>
-        <div className="icon">
+      <div className='content-item' onClick={() => setIsShowModal(true)}>
+        <div className='icon'>
           <IconPencilSquare />
         </div>
         <p>Write new post</p>
@@ -59,15 +59,15 @@ const Navbar = () => {
               className={`content-item ${pathname === item.href ? 'active' : ''}`}
               href={item.href}
             >
-              <div className="icon">{item.icon}</div>
+              <div className='icon'>{item.icon}</div>
               <p>{item.title}</p>
             </Link>
           )
         }
 
         return (
-          <div key={item.title} className="content-item" onClick={handleLogout}>
-            <div className="icon">{item.icon}</div>
+          <div key={item.title} className='content-item' onClick={handleLogout}>
+            <div className='icon'>{item.icon}</div>
             <p>{item.title}</p>
           </div>
         )

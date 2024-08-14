@@ -6,13 +6,7 @@ export enum EVENT_KEY {
   USER_CONTROL = 'user:control'
 }
 
-export const sendEvent = <T>({
-  eventName,
-  data
-}: {
-  eventName: EVENT_KEY
-  data?: T
-}) => {
+export const sendEvent = <T>({ eventName, data }: { eventName: EVENT_KEY; data?: T }) => {
   document.dispatchEvent(new CustomEvent(eventName, { detail: data }))
 }
 

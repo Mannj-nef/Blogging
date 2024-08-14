@@ -1,9 +1,4 @@
-import {
-  IconBook,
-  IconLogOut,
-  IconPencilSquare,
-  IconUser
-} from '~/components/common/icons'
+import { IconBook, IconLogOut, IconPencilSquare, IconUser } from '~/components/common/icons'
 import { ROUTER } from '../constants'
 
 export const NAVIGATORS = [

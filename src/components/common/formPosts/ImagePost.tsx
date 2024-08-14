@@ -10,12 +10,7 @@ interface IProps {
   isLoading?: boolean
 }
 
-const ImagePost = ({
-  handleUploadImage,
-  imageURL,
-  setImageUrl,
-  isLoading
-}: IProps) => {
+const ImagePost = ({ handleUploadImage, imageURL, setImageUrl, isLoading }: IProps) => {
   const [fileEnter, setFileEnter] = useState(false)
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -48,7 +43,7 @@ const ImagePost = ({
       {imageURL ? (
         <>
           <div style={{ width: '100%', height: '200px', position: 'relative' }}>
-            <Image src={imageURL} style={{ objectFit: 'cover' }} alt="" fill />
+            <Image src={imageURL} style={{ objectFit: 'cover' }} alt='' fill />
             <span
               style={{
                 color: ' red',
@@ -96,7 +91,7 @@ const ImagePost = ({
             onDrop={handleDrop}
           >
             <label
-              htmlFor="file"
+              htmlFor='file'
               style={{
                 width: '100%',
                 height: '100%',
@@ -106,17 +101,15 @@ const ImagePost = ({
                 cursor: 'pointer'
               }}
             >
-              <p className="ant-upload-text">
-                {fileEnter
-                  ? 'Drop image here'
-                  : 'Click or drag image [ jpg, png ] to this area to upload'}
+              <p className='ant-upload-text'>
+                {fileEnter ? 'Drop image here' : 'Click or drag image [ jpg, png ] to this area to upload'}
               </p>
             </label>
           </div>
 
           <input
-            id="file"
-            type="file"
+            id='file'
+            type='file'
             style={{ display: 'none' }}
             onChange={(e) => {
               handleUploadImage({ event: e })

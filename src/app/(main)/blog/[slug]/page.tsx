@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { CommentPost, ContentBlog, TopBlog } from '~/components/blogDetail'
 import { useQuery } from '@tanstack/react-query'
-import { detailPost } from '~/services/posts'
+import { detailPost } from '~/apis/posts'
 import { QUERY_KEY } from '~/shared/constants'
-import useAuthStore from '~/store/authStore'
-import usePostStore from '~/store/postStore'
+import useAuthStore from '~/store/zustand/authStore'
+import usePostStore from '~/store/zustand/postStore'
 
 import './style.scss'
 
@@ -38,11 +38,8 @@ const BlogDetail = () => {
     )
 
   return (
-    <div className="container post-detail-wrapper">
-      <TopBlog
-        blogDetail={postDetail}
-        openComment={() => setIsShowModalComment(true)}
-      />
+    <div className='container post-detail-wrapper'>
+      <TopBlog blogDetail={postDetail} openComment={() => setIsShowModalComment(true)} />
 
       <ContentBlog blogDetail={postDetail} />
 

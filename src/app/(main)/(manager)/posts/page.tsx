@@ -7,11 +7,11 @@ import { useEffect, useMemo, useState } from 'react'
 import Input from '~/components/common/form/Input'
 import { IconSearch } from '~/components/common/icons'
 import ActionTable from '~/components/post/action'
-import { getYourPost } from '~/services/posts'
+import { getYourPost } from '~/apis/posts'
 import { QUERY_KEY } from '~/shared/constants'
 import { IMAGES } from '~/shared/images'
-import useAuthStore from '~/store/authStore'
-import usePostStore from '~/store/postStore'
+import useAuthStore from '~/store/zustand/authStore'
+import usePostStore from '~/store/zustand/postStore'
 import { Post, STATUS_POST } from '~/types/post'
 import { User } from '~/types/user'
 
@@ -32,11 +32,7 @@ const YourPosts = () => {
     }
   })
 
-  const handleTableChange: TableProps['onChange'] = (
-    pagination,
-    filters,
-    sorter
-  ) => {
+  const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter) => {
     setTableParams({
       pagination,
       filters,
@@ -82,13 +78,13 @@ const YourPosts = () => {
               <Image
                 src={record.imageThumbnail || IMAGES.IMAGE_DEFAULT}
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                alt=""
+                alt=''
                 width={100}
                 height={100}
               />
             </div>
 
-            <h3 className="text-line-3">{record.title}</h3>
+            <h3 className='text-line-3'>{record.title}</h3>
           </div>
         )
       },
@@ -121,9 +117,7 @@ const YourPosts = () => {
       {
         title: 'Action',
         key: 'action',
-        render: (_, record) => (
-          <ActionTable postId={record.id} postDetail={record} />
-        )
+        render: (_, record) => <ActionTable postId={record.id} postDetail={record} />
       }
     ],
     []
@@ -136,15 +130,11 @@ const YourPosts = () => {
   }, [dataResponse, setYourPosts])
 
   return (
-    <div className="your-posts-wrapper">
-      <div className="your-posts-top">
+    <div className='your-posts-wrapper'>
+      <div className='your-posts-top'>
         <h2>Your post</h2>
 
-        <Input
-          placeholder="search"
-          customClass="your-post-search"
-          onChange={() => {}}
-        >
+        <Input placeholder='search' customClass='your-post-search' onChange={() => {}}>
           <IconSearch />
         </Input>
       </div>

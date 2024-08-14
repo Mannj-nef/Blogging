@@ -10,7 +10,7 @@ import Category from './category'
 import LatePost from './latePost'
 import Pagination from '~/components/common/pagination'
 import { useQuery } from '@tanstack/react-query'
-import { getPosts } from '~/services/posts'
+import { getPosts } from '~/apis/posts'
 import { useEffect, useState } from 'react'
 import { Post } from '~/types/post'
 
@@ -53,17 +53,11 @@ const MainPost = ({ isBlogAll = false }: IProps) => {
   }, [isBlogAll])
 
   return (
-    <div className="main-post container">
-      <div
-        className="main-post-content"
-        style={{ flexDirection: isBlogAll ? 'row-reverse' : 'row' }}
-      >
-        <div
-          style={{ width: isBlogAll ? '80%' : '75%' }}
-          className="main-post-content-left"
-        >
+    <div className='main-post container'>
+      <div className='main-post-content' style={{ flexDirection: isBlogAll ? 'row-reverse' : 'row' }}>
+        <div style={{ width: isBlogAll ? '80%' : '75%' }} className='main-post-content-left'>
           {!isBlogAll && (
-            <div className="main-post-content-top-left">
+            <div className='main-post-content-top-left'>
               <span>
                 <IconDashboard />
               </span>
@@ -73,14 +67,10 @@ const MainPost = ({ isBlogAll = false }: IProps) => {
             </div>
           )}
 
-          <Row gutter={[16, 16]} className="main-content-post">
+          <Row gutter={[16, 16]} className='main-content-post'>
             {postData.length > 0 &&
               postData.map((post) => (
-                <Col
-                  span={isBlogAll ? 8 : 12}
-                  key={post.id}
-                  className="gutter-row"
-                >
+                <Col span={isBlogAll ? 8 : 12} key={post.id} className='gutter-row'>
                   <Link href={`${ROUTER.BLOG}/${post.slug} ${post.id}`}>
                     <CardPost post={post} />
                   </Link>
@@ -96,17 +86,10 @@ const MainPost = ({ isBlogAll = false }: IProps) => {
           />
         </div>
 
-        <div
-          style={{ width: isBlogAll ? '20%' : '25%' }}
-          className="main-post-content-right"
-        >
+        <div style={{ width: isBlogAll ? '20%' : '25%' }} className='main-post-content-right'>
           <Search onSearch={setSearchTitle} />
 
-          <Category
-            category={CATEGORY_ENUM_DATA}
-            onSearch={setCategory as any}
-            categorySelected={category}
-          />
+          <Category category={CATEGORY_ENUM_DATA} onSearch={setCategory as any} categorySelected={category} />
 
           <LatePost />
         </div>

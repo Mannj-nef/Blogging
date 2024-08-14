@@ -1,18 +1,11 @@
 import axios from 'axios'
 import { ChangeEvent, useState } from 'react'
-import { ENV } from '~/shared/constants'
 
 const useUploadImage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [imageURL, setImageUrl] = useState('')
 
-  const handleUploadImage = async ({
-    event,
-    file
-  }: {
-    event: ChangeEvent<HTMLInputElement>
-    file?: File
-  }) => {
+  const handleUploadImage = async ({ event, file }: { event: ChangeEvent<HTMLInputElement>; file?: File }) => {
     const files = event.target.files
 
     const bodyFormData = new FormData()

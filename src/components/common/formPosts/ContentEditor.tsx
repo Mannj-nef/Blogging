@@ -8,10 +8,7 @@ interface IProps {
 }
 
 const ContentEditor = ({ setValue, value }: IProps) => {
-  const ReactQuill = useMemo(
-    () => dynamic(() => import('react-quill'), { ssr: false }),
-    []
-  )
+  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
 
   const modules = useMemo(
     () => ({
@@ -37,14 +34,14 @@ const ContentEditor = ({ setValue, value }: IProps) => {
           marginBottom: 10
         }}
       >
-        <label htmlFor="image">Content</label>
+        <label htmlFor='image'>Content</label>
       </div>
 
       <ReactQuill
-        className="react-quill-custom-class"
+        className='react-quill-custom-class'
         style={{ marginBottom: 20 }}
         modules={modules}
-        theme="snow"
+        theme='snow'
         value={value}
         onChange={setValue}
       />

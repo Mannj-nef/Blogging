@@ -10,16 +10,12 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   loading?: boolean
 }
 
-const Button = ({
-  htmlType = 'button',
-  className = '',
-  ...props
-}: IButtonProps) => {
+const Button = ({ htmlType = 'button', className = '', ...props }: IButtonProps) => {
   return (
-    <div className="wrap-button">
+    <div className='wrap-button'>
       <AntButton
         style={{ width: '100%' }}
-        color="#b39b9b"
+        color='#b39b9b'
         className={`button-common ${className}`}
         htmlType={htmlType}
         loading={props.loading}

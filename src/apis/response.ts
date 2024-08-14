@@ -7,11 +7,7 @@ import { handleRefreshToken } from './handleRefreshToken'
 export const handleResponseAuth = async (res: AxiosResponse) => {
   const { url } = res.config
 
-  const authApis: string[] = [
-    API_ENDPOINT.SIGN_IN,
-    API_ENDPOINT.SIGN_UP,
-    API_ENDPOINT.RESET_PASSWORD
-  ]
+  const authApis: string[] = [API_ENDPOINT.SIGN_IN, API_ENDPOINT.SIGN_UP, API_ENDPOINT.RESET_PASSWORD]
 
   if (authApis.includes(`${url}`)) {
     const data: ResponseAuthBase = res.data
@@ -38,11 +34,7 @@ export const handleErrorResponse = async (error: AxiosError) => {
 
   const authApis: string[] = [API_ENDPOINT.REFRESH_TOKEN]
 
-  if (
-    status === 401 &&
-    axios.isAxiosError(error) &&
-    !authApis.includes(`${url}`)
-  ) {
+  if (status === 401 && axios.isAxiosError(error) && !authApis.includes(`${url}`)) {
     await handleRefreshToken()
   }
   throw error

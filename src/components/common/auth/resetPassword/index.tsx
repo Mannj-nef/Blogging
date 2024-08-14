@@ -3,11 +3,11 @@
 import { Flex, Form, FormProps, GetProps, Input } from 'antd'
 import React from 'react'
 import Button from '~/components/common/button'
-import useAuthStore from '~/store/authStore'
+import useAuthStore from '~/store/zustand/authStore'
 
 import './style.scss'
 import { IconBack } from '~/components/common/icons'
-import { resetPassword } from '~/services/auth'
+import { resetPassword } from '~/apis/auth'
 import { useMutation } from '@tanstack/react-query'
 import useToast from '~/hooks/useToast'
 import { MESSAGE } from '~/shared/constants'
@@ -46,8 +46,7 @@ const ResetPassword = () => {
         authenticationSuccess()
       },
       onError: (err: any) => {
-        const errorMessage =
-          err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+        const errorMessage = err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
         openNotification({
           message: errorMessage,
           type: 'error'
@@ -56,9 +55,7 @@ const ResetPassword = () => {
     })
   }
 
-  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
-    errorInfo
-  ) => {
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
 
@@ -70,43 +67,38 @@ const ResetPassword = () => {
     onChange
   }
   return (
-    <div className="reset-password">
+    <div className='reset-password'>
       {contextHolder}
-      <h2 className="reset-password-top">Reset password</h2>
+      <h2 className='reset-password-top'>Reset password</h2>
 
-      <Form
-        layout="vertical"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
+      <Form layout='vertical' onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete='off'>
         <Form.Item
-          label="OTP"
-          name="otp"
-          className="field-wrapper"
+          label='OTP'
+          name='otp'
+          className='field-wrapper'
           rules={[{ required: true, message: 'Please input your OTP' }]}
         >
-          <Flex gap="middle" align="flex-start" vertical>
+          <Flex gap='middle' align='flex-start' vertical>
             <Input.OTP length={6} {...sharedProps} />
           </Flex>
         </Form.Item>
 
         <Form.Item
-          label="Password"
-          name="password"
-          className="field-wrapper"
+          label='Password'
+          name='password'
+          className='field-wrapper'
           rules={[
             { required: true, message: 'Please input your password!' },
             { min: 6, message: 'Please input your password!' }
           ]}
         >
-          <Input.Password placeholder="Enter your password" />
+          <Input.Password placeholder='Enter your password' />
         </Form.Item>
 
         <Form.Item
-          label="Confirm Password"
-          name="confirmPassword"
-          className="field-wrapper"
+          label='Confirm Password'
+          name='confirmPassword'
+          className='field-wrapper'
           rules={[
             { required: true, message: 'Please input your confirm password!' },
             ({ getFieldValue }) => ({
@@ -114,28 +106,23 @@ const ResetPassword = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-                return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
-                )
+                return Promise.reject(new Error('The two passwords that you entered do not match!'))
               }
             })
           ]}
         >
-          <Input.Password placeholder="Enter your password" />
+          <Input.Password placeholder='Enter your password' />
         </Form.Item>
 
-        <div
-          className="go-back"
-          onClick={() => setTitleModal('FORGOT_PASSWORD')}
-        >
-          <span className="go-back-icon">
+        <div className='go-back' onClick={() => setTitleModal('FORGOT_PASSWORD')}>
+          <span className='go-back-icon'>
             <IconBack />
           </span>
           <p>Back</p>
         </div>
 
         <Form.Item>
-          <Button htmlType="submit" className="sign-button" loading={isPending}>
+          <Button htmlType='submit' className='sign-button' loading={isPending}>
             Reset password
           </Button>
         </Form.Item>

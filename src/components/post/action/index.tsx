@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { IconEye, IconPencilSquare, IconTrash } from '~/components/common/icons'
 
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import usePostStore from '~/store/postStore'
+import usePostStore from '~/store/zustand/postStore'
 import { Post } from '~/types/post'
 import Link from 'next/link'
 import { MESSAGE, ROUTER } from '~/shared/constants'
@@ -10,7 +10,7 @@ import { Modal } from 'antd'
 
 import './style.scss'
 import { useMutation } from '@tanstack/react-query'
-import { deletePost } from '~/services/posts'
+import { deletePost } from '~/apis/posts'
 import useToast from '~/hooks/useToast'
 interface IProps {
   postId: string
@@ -20,8 +20,7 @@ interface IProps {
 const { confirm } = Modal
 
 const ActionTable = ({ postId, postDetail }: IProps) => {
-  const { setIsShowModal, setPostDetailUpdate, setYourPosts, yourPosts } =
-    usePostStore()
+  const { setIsShowModal, setPostDetailUpdate, setYourPosts, yourPosts } = usePostStore()
 
   const { contextHolder, openNotification } = useToast()
 
@@ -41,8 +40,7 @@ const ActionTable = ({ postId, postDetail }: IProps) => {
           },
 
           onError: (err: any) => {
-            const errorMessage =
-              err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
+            const errorMessage = err?.response?.data.message || MESSAGE.SOMETHING_WENT_WRONG
             openNotification({
               message: errorMessage,
               type: 'error'
@@ -73,31 +71,24 @@ const ActionTable = ({ postId, postDetail }: IProps) => {
         type: 'view',
         icon: (
           <Link href={`${ROUTER.BLOG}/${postDetail.slug} ${postId}`}>
-            <IconEye
-              style={{ width: 20, height: 20, color: 'var(--color-green)' }}
-            />
+            <IconEye style={{ width: 20, height: 20, color: 'var(--color-green)' }} />
           </Link>
         )
       },
       {
         type: 'delete',
-        icon: (
-          <IconTrash
-            onClick={showDeleteConfirm}
-            style={{ width: 20, height: 20, color: 'var(--color-danger)' }}
-          />
-        )
+        icon: <IconTrash onClick={showDeleteConfirm} style={{ width: 20, height: 20, color: 'var(--color-danger)' }} />
       }
     ],
     [showDeleteConfirm, handleOpenModalEditPost, postDetail.slug, postId]
   )
 
   return (
-    <div className="action-table-wrapper">
+    <div className='action-table-wrapper'>
       {contextHolder}
 
       {BUTTON_ACTIONS.map((item) => (
-        <div key={item.type} className="action-item">
+        <div key={item.type} className='action-item'>
           {item.icon}
         </div>
       ))}

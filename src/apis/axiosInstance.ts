@@ -14,6 +14,8 @@ const httpPrivate = http
 const httpPublic = http
 
 httpPrivate.interceptors.request.use(handelRequestPrivate)
+httpPrivate.interceptors.response.use(handleResponseAuth, handleErrorResponse)
+
 http.interceptors.response.use(handleResponseAuth, handleErrorResponse)
 
 export { httpPrivate, httpPublic }

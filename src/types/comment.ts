@@ -9,8 +9,5 @@ export type Comment = {
   content: string
   parentId: string | null
   replies: Comment[]
-  user: Pick<
-    User,
-    'id' | 'email' | 'firstName' | 'lastName' | 'coverPhoto' | 'userName'
-  >
+  user: Pick<User, 'id' | 'email' | 'firstName' | 'lastName' | 'coverPhoto' | 'userName'>
 }

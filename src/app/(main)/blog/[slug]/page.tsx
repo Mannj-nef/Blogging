@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { CommentPost, ContentBlog, TopBlog } from '~/modules/blog/blogDetail'
+import { CommentPost, ContentBlog, TopBlog } from '~/components/blogDetail'
 import { useQuery } from '@tanstack/react-query'
 import { detailPost } from '~/services/posts'
 import { QUERY_KEY } from '~/shared/constants'

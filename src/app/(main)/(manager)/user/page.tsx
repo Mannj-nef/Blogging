@@ -2,7 +2,7 @@
 import { Col, DatePicker, Form, FormProps, Input, Row } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
-import Button from '~/components/button'
+import Button from '~/components/common/button'
 import useUploadImage from '~/hooks/useUploadImage'
 import useAuthStore from '~/store/authStore'
 import Image from 'next/image'
@@ -13,7 +13,7 @@ import { useMutation } from '@tanstack/react-query'
 import { updateProfile } from '~/services/user'
 import { MESSAGE } from '~/shared/constants'
 import useToast from '~/hooks/useToast'
-import { IconCamera, IconCloseMark } from '~/components/icons'
+import { IconCamera, IconCloseMark } from '~/components/common/icons'
 import { useEffect } from 'react'
 dayjs.extend(customParseFormat)
 

@@ -16,8 +16,8 @@ export const API_ENDPOINT = {
   GET_POST_BY_USER: '/posts/user',
 
   // reaction
-  REACTION_POST: 'reaction',
+  REACTION_POST: 'reactions',
 
   // comment
-  GET_COMMENT: 'comment'
+  GET_COMMENT: 'comments'
 } as const

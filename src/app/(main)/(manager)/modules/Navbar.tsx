@@ -9,7 +9,7 @@ import { logOut } from '~/services/auth'
 import useToken from '~/hooks/useToken'
 import useAuthStore from '~/store/authStore'
 import { MESSAGE } from '~/shared/constants'
-import { IconPencilSquare } from '~/components/icons'
+import { IconPencilSquare } from '~/components/common/icons'
 import usePostStore from '~/store/postStore'
 
 const Navbar = () => {

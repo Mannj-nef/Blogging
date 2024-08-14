@@ -1,7 +1,7 @@
 import './style.scss'
-import Hero from '~/modules/home/hero'
-import TrendingPosts from '~/modules/home/trending'
-import MainPost from '~/modules/home/mainPost'
+import Hero from '~/components/home/hero'
+import TrendingPosts from '~/components/home/trending'
+import MainPost from '~/components/home/mainPost'
 import Footer from '~/components/footer'
 
 const Home = () => {

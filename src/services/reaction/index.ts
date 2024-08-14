@@ -1,4 +1,4 @@
-import httpPrivate from '~/apis/private'
+import { httpPrivate } from '~/apis/axiosInstance'
 import { API_ENDPOINT } from '~/shared/constants'
 import { REACTION_TYPE } from '~/types/post'
 

@@ -6,8 +6,8 @@ import {
   ResetPassword,
   SignIn,
   SignUp
-} from '~/components/auth'
-import Modal from '~/components/modal'
+} from '~/components/common/auth'
+import Modal from '~/components/common/modal'
 import { getMe } from '~/services/user'
 import { QUERY_KEY } from '~/shared/constants'
 import useAuthStore from '~/store/authStore'

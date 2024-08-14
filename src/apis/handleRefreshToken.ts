@@ -1,4 +1,5 @@
-import { API_ENDPOINT, ENV } from '~/shared/constants'
+import axios from 'axios'
+import { API_ENDPOINT } from '~/shared/constants'
 import { getToken, removeToken, setToken } from '~/utils/handleToken'
 
 export const handleRefreshToken = async () => {
@@ -7,20 +8,18 @@ export const handleRefreshToken = async () => {
   if (!token || !token.refreshToken) return
 
   try {
-    const response = await fetch(
-      `${ENV.BASE_API_URL_FULL}${API_ENDPOINT.REFRESH_TOKEN}`,
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}${API_ENDPOINT.REFRESH_TOKEN}`,
       {
-        method: 'POST',
+        refreshToken: token.refreshToken
+      },
+      {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          refreshToken: token.refreshToken
-        })
+        }
       }
     )
 
-    const data = await response.json()
     setToken(data.token)
   } catch (error) {
     removeToken()

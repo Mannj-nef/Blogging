@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import MainPost from '~/modules/home/mainPost'
+import MainPost from '~/components/home/mainPost'
 
 const BlogPage = () => {
   return <MainPost isBlogAll />

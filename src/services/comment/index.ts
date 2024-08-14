@@ -1,5 +1,5 @@
-import httpPrivate from '~/apis/private'
-import httpPublic from '~/apis/public'
+import { httpPrivate, httpPublic } from '~/apis/axiosInstance'
+
 import { API_ENDPOINT } from '~/shared/constants'
 import {
   RequestGetComment,

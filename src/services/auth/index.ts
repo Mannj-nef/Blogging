@@ -1,4 +1,4 @@
-import httpPublic from '~/apis/public'
+import { httpPublic } from '~/apis/axiosInstance'
 import { API_ENDPOINT } from '~/shared/constants'
 import {
   RequestForgotPassword,
@@ -10,7 +10,6 @@ import {
 import {
   ResponseForgotPassword,
   ResponseLogOut,
-  ResponseRefreshToken,
   ResponseResetPassword,
   ResponseSignIn,
   ResponseSignUp

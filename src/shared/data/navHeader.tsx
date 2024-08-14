@@ -3,7 +3,7 @@ import {
   IconLogOut,
   IconPencilSquare,
   IconUser
-} from '~/components/icons'
+} from '~/components/common/icons'
 import { ROUTER } from '../constants'
 
 export const NAVIGATORS = [

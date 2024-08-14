@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from '~/shared/constants'
-import { ResponseUser } from '../../types/response/auth'
-import httpPrivate from '~/apis/private'
+import { ResponseUser } from '~/types/response/auth'
 import { RequestUpdateProfile } from '~/types/request/auth'
+import { httpPrivate } from '~/apis/axiosInstance'
 
 export const getMe = async () => {
   const { data } = await httpPrivate.get<ResponseUser>(API_ENDPOINT.GET_ME)
